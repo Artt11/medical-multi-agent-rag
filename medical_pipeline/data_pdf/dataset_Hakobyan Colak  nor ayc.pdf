@@ -1,0 +1,285 @@
+%PDF-1.3
+%‚„œ”
+1 0 obj
+<<
+/Producer (pypdf)
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Count 2
+/Kids [ 4 0 R 11 0 R ]
+>>
+endobj
+3 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+4 0 obj
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 5 0 R
+/F1-0 6 0 R
+/F2 7 0 R
+/F2-0 8 0 R
+/F3 9 0 R
+>>
+/ProcSet [ /ImageB /ImageC /ImageI /PDF /Text ]
+>>
+/Contents 10 0 R
+/MediaBox [ 0 0 595.28 841.89 ]
+/Annots [ ]
+/Parent 2 0 R
+>>
+endobj
+5 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+>>
+endobj
+6 0 obj
+<<
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+7 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+>>
+endobj
+8 0 obj
+<<
+/BaseFont /Courier
+/Encoding /WinAnsiEncoding
+/Name /F2
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+9 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+>>
+endobj
+10 0 obj
+<<
+/Length 4383
+>>
+stream
+q
+2 J
+0.57 w
+BT /F1 12.00 Tf ET
+BT 197.63 795.77 Td (AVETISYAN DIAGNOSTIC CENTER) Tj ET
+BT /F2 10.00 Tf ET
+BT 234.83 768.02 Td (City Artik, Ankaxutyan 21/50) Tj ET
+BT /F1 12.00 Tf ET
+BT 31.19 724.90 Td (Patient Information) Tj ET
+BT /F2 11.00 Tf ET
+28.35 714.33 226.77 -22.68 re S BT 31.19 699.69 Td (Name) Tj ET
+255.12 714.33 113.39 -22.68 re S BT 257.96 699.69 Td (Hakobyan Colak) Tj ET
+28.35 691.65 226.77 -22.68 re S BT 31.19 677.01 Td (Sex) Tj ET
+255.12 691.65 113.39 -22.68 re S BT 257.96 677.01 Td (Male) Tj ET
+28.35 668.97 226.77 -22.68 re S BT 31.19 654.33 Td (Date of Birth) Tj ET
+255.12 668.97 113.39 -22.68 re S BT 257.96 654.33 Td (02.10.1956) Tj ET
+28.35 646.30 226.77 -22.68 re S BT 31.19 631.66 Td (Study Date) Tj ET
+255.12 646.30 113.39 -22.68 re S BT 257.96 631.66 Td (24.11.2025) Tj ET
+28.35 623.62 226.77 -22.68 re S BT 31.19 608.98 Td (Procedure) Tj ET
+255.12 623.62 113.39 -22.68 re S BT 257.96 608.98 Td (Complete Echocardiogram) Tj ET
+28.35 600.94 226.77 -22.68 re S BT 31.19 586.30 Td (Priority) Tj ET
+255.12 600.94 113.39 -22.68 re S BT 257.96 586.30 Td (Routine) Tj ET
+28.35 578.26 226.77 -22.68 re S BT 31.19 563.63 Td (Indication) Tj ET
+255.12 578.26 113.39 -22.68 re S BT 257.96 563.63 Td (Routine follow-up) Tj ET
+BT /F1 12.00 Tf ET
+BT 31.19 523.64 Td (Echocardiographic Measurements) Tj ET
+BT /F2 11.00 Tf ET
+28.35 513.07 226.77 -22.68 re S BT 31.19 498.43 Td (Ao root) Tj ET
+255.12 513.07 113.39 -22.68 re S BT 257.96 498.43 Td (2.7 cm) Tj ET
+28.35 490.39 226.77 -22.68 re S BT 31.19 475.75 Td (Ao Ascending) Tj ET
+255.12 490.39 113.39 -22.68 re S BT 257.96 475.75 Td (3.6 cm) Tj ET
+28.35 467.71 226.77 -22.68 re S BT 31.19 453.07 Td (Ao Abdominal) Tj ET
+255.12 467.71 113.39 -22.68 re S BT 257.96 453.07 Td (1.42 cm) Tj ET
+28.35 445.04 226.77 -22.68 re S BT 31.19 430.40 Td (Left atrial size) Tj ET
+255.12 445.04 113.39 -22.68 re S BT 257.96 430.40 Td (2.8 cm) Tj ET
+28.35 422.36 226.77 -22.68 re S BT 31.19 407.72 Td (LVEDD) Tj ET
+255.12 422.36 113.39 -22.68 re S BT 257.96 407.72 Td (3.8 cm) Tj ET
+28.35 399.68 226.77 -22.68 re S BT 31.19 385.04 Td (LVEDV) Tj ET
+255.12 399.68 113.39 -22.68 re S BT 257.96 385.04 Td (4.1 cm) Tj ET
+28.35 377.00 226.77 -22.68 re S BT 31.19 362.37 Td (LVESV) Tj ET
+255.12 377.00 113.39 -22.68 re S BT 257.96 362.37 Td (18 ml) Tj ET
+28.35 354.33 226.77 -22.68 re S BT 31.19 339.69 Td (IVS) Tj ET
+255.12 354.33 113.39 -22.68 re S BT 257.96 339.69 Td (1.1 cm) Tj ET
+28.35 331.65 226.77 -22.68 re S BT 31.19 317.01 Td (PW \(scar\)) Tj ET
+255.12 331.65 113.39 -22.68 re S BT 257.96 317.01 Td (0.9 cm) Tj ET
+28.35 308.97 226.77 -22.68 re S BT 31.19 294.33 Td (RV Basal Diameter) Tj ET
+255.12 308.97 113.39 -22.68 re S BT 257.96 294.33 Td (3.3 cm) Tj ET
+28.35 286.30 226.77 -22.68 re S BT 31.19 271.66 Td (TAPSE) Tj ET
+255.12 286.30 113.39 -22.68 re S BT 257.96 271.66 Td (2.4 cm) Tj ET
+28.35 263.62 226.77 -22.68 re S BT 31.19 248.98 Td (EF%) Tj ET
+255.12 263.62 113.39 -22.68 re S BT 257.96 248.98 Td (35-37%) Tj ET
+28.35 240.94 226.77 -22.68 re S BT 31.19 226.30 Td (IVC Collapse) Tj ET
+255.12 240.94 113.39 -22.68 re S BT 257.96 226.30 Td (>50%) Tj ET
+28.35 218.26 226.77 -22.68 re S BT 31.19 203.63 Td (Pericardium) Tj ET
+255.12 218.26 113.39 -22.68 re S BT 257.96 203.63 Td (Normal) Tj ET
+28.35 195.59 226.77 -22.68 re S BT 31.19 180.95 Td (Mitral Valve) Tj ET
+255.12 195.59 113.39 -22.68 re S BT 257.96 180.95 Td (Trace regurgitation) Tj ET
+28.35 172.91 226.77 -22.68 re S BT 31.19 158.27 Td (Diastolic Dysfunction) Tj ET
+255.12 172.91 113.39 -22.68 re S BT 257.96 158.27 Td (Pseudonormal) Tj ET
+28.35 150.23 226.77 -22.68 re S BT 31.19 135.59 Td (E/E) Tj ET
+255.12 150.23 113.39 -22.68 re S BT 257.96 135.59 Td (Moderate \(8-13\)) Tj ET
+28.35 127.56 226.77 -22.68 re S BT 31.19 112.92 Td (Mitral Stenosis) Tj ET
+255.12 127.56 113.39 -22.68 re S BT 257.96 112.92 Td (Soft \(>1.5\), Mean Gradient <5) Tj ET
+28.35 104.88 226.77 -22.68 re S BT 31.19 90.24 Td (Aortic Stenosis) Tj ET
+255.12 104.88 113.39 -22.68 re S BT 257.96 90.24 Td (Soft, Gradient <20) Tj ET
+28.35 82.20 226.77 -22.68 re S BT 31.19 67.56 Td (Aortic Regurgitation) Tj ET
+255.12 82.20 113.39 -22.68 re S BT 257.96 67.56 Td (Soft) Tj ET
+BT /F3 8.00 Tf ET
+BT 284.96 25.95 Td (Page 1) Tj ET
+
+Q
+
+q
+0.0 0.0 612 792 re
+W
+n
+1 0 0 1 0 0 cm
+BT
+/F1-0 12 Tf
+14.4 TL
+ET
+BT
+/F2-0 11 Tf
+13.2 TL
+ET
+BT
+1 0 0 1 40 760 Tm
+(SOCIAL\137CARD\137ID\072 619729) Tj
+T*
+ET
+Q
+
+
+endstream
+endobj
+11 0 obj
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 5 0 R
+/F1-0 12 0 R
+/F2 7 0 R
+/F3 9 0 R
+>>
+/ProcSet [ /ImageB /ImageC /ImageI /PDF /Text ]
+>>
+/Contents 13 0 R
+/MediaBox [ 0 0 595.28 841.89 ]
+/Annots [ ]
+/Parent 2 0 R
+>>
+endobj
+12 0 obj
+<<
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+13 0 obj
+<<
+/Length 1424
+>>
+stream
+q
+2 J
+0.57 w
+BT /F2 11.00 Tf ET
+BT /F1 12.00 Tf ET
+BT 197.63 795.77 Td (AVETISYAN DIAGNOSTIC CENTER) Tj ET
+BT /F2 10.00 Tf ET
+BT 234.83 768.02 Td (City Artik, Ankaxutyan 21/50) Tj ET
+BT /F2 11.00 Tf ET
+28.35 742.67 226.77 -22.68 re S BT 31.19 728.04 Td (Tricuspid Regurgitation) Tj ET
+255.12 742.67 113.39 -22.68 re S BT 257.96 728.04 Td (Trivial) Tj ET
+28.35 720.00 226.77 -22.68 re S BT 31.19 705.36 Td (Pulmonary Artery Pressure) Tj ET
+255.12 720.00 113.39 -22.68 re S BT 257.96 705.36 Td (<30 mmHg) Tj ET
+BT /F1 12.00 Tf ET
+BT 31.19 665.37 Td (Conclusion) Tj ET
+BT /F2 11.00 Tf ET
+0.140 Tw
+BT 31.19 640.16 Td (There is no dilatation of the heart chambers. Mild concentric hypertrophy of the left ventricle. Systolic function) Tj ET
+3.161 Tw
+BT 31.19 617.48 Td (of the right ventricle is preserved. Aortic structure is stable. Mild thickening of mitral valve with trace) Tj ET
+1.771 Tw
+BT 31.19 594.81 Td (regurgitation. EF improved to 35-37%. No signs of pulmonary hypertension or pericardial effusion. Stable) Tj ET
+3.872 Tw
+BT 31.19 572.13 Td (valve structure compared to previous study. Recommended continued follow-up and medical therapy) Tj ET
+0 Tw
+BT 31.19 549.45 Td (optimization.) Tj ET
+BT 31.19 512.60 Td (Cardiologist: Dr. John Smith) Tj ET
+BT 31.19 489.93 Td (Date: 24.11.2025) Tj ET
+BT /F3 8.00 Tf ET
+BT 284.96 25.95 Td (Page 2) Tj ET
+
+Q
+
+q
+0.0 0.0 612 792 re
+W
+n
+1 0 0 1 0 0 cm
+BT
+/F1-0 12 Tf
+14.4 TL
+ET
+Q
+
+
+endstream
+endobj
+xref
+0 14
+0000000000 65535 f 
+0000000015 00000 n 
+0000000054 00000 n 
+0000000120 00000 n 
+0000000169 00000 n 
+0000000408 00000 n 
+0000000510 00000 n 
+0000000617 00000 n 
+0000000714 00000 n 
+0000000819 00000 n 
+0000000924 00000 n 
+0000005360 00000 n 
+0000005589 00000 n 
+0000005697 00000 n 
+trailer
+<<
+/Size 14
+/Root 3 0 R
+/Info 1 0 R
+>>
+startxref
+7174
+%%EOF

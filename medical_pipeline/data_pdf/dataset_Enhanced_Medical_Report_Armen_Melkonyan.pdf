@@ -1,0 +1,266 @@
+%PDF-1.3
+%‚„œ”
+1 0 obj
+<<
+/Producer (pypdf)
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Count 2
+/Kids [ 4 0 R 10 0 R ]
+>>
+endobj
+3 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+4 0 obj
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 5 0 R
+/F1-0 6 0 R
+/F2 7 0 R
+/F2-0 8 0 R
+>>
+/ProcSet [ /ImageB /ImageC /ImageI /PDF /Text ]
+>>
+/Contents 9 0 R
+/MediaBox [ 0 0 595.28 841.89 ]
+/Annots [ ]
+/Parent 2 0 R
+>>
+endobj
+5 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+>>
+endobj
+6 0 obj
+<<
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+7 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+>>
+endobj
+8 0 obj
+<<
+/BaseFont /Courier
+/Encoding /WinAnsiEncoding
+/Name /F2
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+9 0 obj
+<<
+/Length 3040
+>>
+stream
+q
+2 J
+0.57 w
+BT /F1 14.00 Tf ET
+BT 152.16 795.17 Td (Heratsi Clinical Laboratory - Medical Report) Tj ET
+BT /F2 12.00 Tf ET
+BT 31.19 744.74 Td (Patient Name: Armen Melkonyan) Tj ET
+BT 31.19 716.40 Td (Date of Birth: 05.02.1979) Tj ET
+BT 31.19 688.05 Td (Patient ID: MP-2025-003) Tj ET
+BT 31.19 659.70 Td (Email: armen.melkonyan@example.com) Tj ET
+BT 31.19 631.36 Td (Phone Number: +374 95 889900) Tj ET
+BT 31.19 603.01 Td (Report Date: 2025-11-24) Tj ET
+BT 31.19 574.66 Td (Doctor: Heratsi Lab Physician) Tj ET
+BT /F1 12.00 Tf ET
+BT 31.19 523.64 Td (1. Complete Blood Count \(CBC\) with Differential) Tj ET
+BT /F2 11.00 Tf ET
+28.35 513.07 127.56 -22.68 re S BT 31.19 498.43 Td (WBC) Tj ET
+155.91 513.07 85.04 -22.68 re S BT 158.74 498.43 Td (5.12) Tj ET
+28.35 490.39 127.56 -22.68 re S BT 31.19 475.75 Td (RBC) Tj ET
+155.91 490.39 85.04 -22.68 re S BT 158.74 475.75 Td (4.65) Tj ET
+28.35 467.71 127.56 -22.68 re S BT 31.19 453.07 Td (HGB) Tj ET
+155.91 467.71 85.04 -22.68 re S BT 158.74 453.07 Td (140) Tj ET
+28.35 445.04 127.56 -22.68 re S BT 31.19 430.40 Td (HCT) Tj ET
+155.91 445.04 85.04 -22.68 re S BT 158.74 430.40 Td (41.2) Tj ET
+28.35 422.36 127.56 -22.68 re S BT 31.19 407.72 Td (MCV) Tj ET
+155.91 422.36 85.04 -22.68 re S BT 158.74 407.72 Td (88.5) Tj ET
+28.35 399.68 127.56 -22.68 re S BT 31.19 385.04 Td (MCH) Tj ET
+155.91 399.68 85.04 -22.68 re S BT 158.74 385.04 Td (30.2) Tj ET
+28.35 377.00 127.56 -22.68 re S BT 31.19 362.37 Td (MCHC) Tj ET
+155.91 377.00 85.04 -22.68 re S BT 158.74 362.37 Td (340) Tj ET
+28.35 354.33 127.56 -22.68 re S BT 31.19 339.69 Td (PLT) Tj ET
+155.91 354.33 85.04 -22.68 re S BT 158.74 339.69 Td (222) Tj ET
+28.35 331.65 127.56 -22.68 re S BT 31.19 317.01 Td (NEUT%) Tj ET
+155.91 331.65 85.04 -22.68 re S BT 158.74 317.01 Td (55.1) Tj ET
+28.35 308.97 127.56 -22.68 re S BT 31.19 294.33 Td (LYMPH%) Tj ET
+155.91 308.97 85.04 -22.68 re S BT 158.74 294.33 Td (36.2) Tj ET
+28.35 286.30 127.56 -22.68 re S BT 31.19 271.66 Td (MONO%) Tj ET
+155.91 286.30 85.04 -22.68 re S BT 158.74 271.66 Td (5.2) Tj ET
+28.35 263.62 127.56 -22.68 re S BT 31.19 248.98 Td (EOS%) Tj ET
+155.91 263.62 85.04 -22.68 re S BT 158.74 248.98 Td (2.0) Tj ET
+28.35 240.94 127.56 -22.68 re S BT 31.19 226.30 Td (BASO%) Tj ET
+155.91 240.94 85.04 -22.68 re S BT 158.74 226.30 Td (0.1) Tj ET
+28.35 218.26 127.56 -22.68 re S BT 31.19 203.63 Td (RDW-CV) Tj ET
+155.91 218.26 85.04 -22.68 re S BT 158.74 203.63 Td (13.2) Tj ET
+28.35 195.59 127.56 -22.68 re S BT 31.19 180.95 Td (MPV) Tj ET
+155.91 195.59 85.04 -22.68 re S BT 158.74 180.95 Td (10.7) Tj ET
+BT /F1 12.00 Tf ET
+BT 31.19 143.80 Td (2. Erythrocyte Sedimentation Rate \(ESR\)) Tj ET
+BT /F2 11.00 Tf ET
+28.35 133.23 127.56 -22.68 re S BT 31.19 118.59 Td (ESR) Tj ET
+155.91 133.23 85.04 -22.68 re S BT 158.74 118.59 Td (7) Tj ET
+BT /F1 12.00 Tf ET
+BT 31.19 81.44 Td (3. Thyroid & Vitamin Panel) Tj ET
+BT /F2 11.00 Tf ET
+
+Q
+
+q
+0.0 0.0 612 792 re
+W
+n
+1 0 0 1 0 0 cm
+BT
+/F1-0 12 Tf
+14.4 TL
+ET
+BT
+/F2-0 11 Tf
+13.2 TL
+ET
+BT
+1 0 0 1 40 760 Tm
+(SOCIAL\137CARD\137ID\072 190371) Tj
+T*
+ET
+Q
+
+
+endstream
+endobj
+10 0 obj
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 5 0 R
+/F1-0 11 0 R
+/F2 7 0 R
+>>
+/ProcSet [ /ImageB /ImageC /ImageI /PDF /Text ]
+>>
+/Contents 12 0 R
+/MediaBox [ 0 0 595.28 841.89 ]
+/Annots [ ]
+/Parent 2 0 R
+>>
+endobj
+11 0 obj
+<<
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+12 0 obj
+<<
+/Length 1996
+>>
+stream
+q
+2 J
+0.57 w
+BT /F2 11.00 Tf ET
+28.35 813.54 127.56 -22.68 re S BT 31.19 798.90 Td (TSH) Tj ET
+155.91 813.54 85.04 -22.68 re S BT 158.74 798.90 Td (2.10) Tj ET
+28.35 790.86 127.56 -22.68 re S BT 31.19 776.22 Td (Vitamin B12) Tj ET
+155.91 790.86 85.04 -22.68 re S BT 158.74 776.22 Td (305.5) Tj ET
+28.35 768.19 127.56 -22.68 re S BT 31.19 753.55 Td (Ferritin) Tj ET
+155.91 768.19 85.04 -22.68 re S BT 158.74 753.55 Td (52.0) Tj ET
+28.35 745.51 127.56 -22.68 re S BT 31.19 730.87 Td (Vitamin D) Tj ET
+155.91 745.51 85.04 -22.68 re S BT 158.74 730.87 Td (17.9) Tj ET
+BT /F1 12.00 Tf ET
+BT 31.19 693.72 Td (4. Coagulation Profile) Tj ET
+BT /F2 11.00 Tf ET
+28.35 683.15 127.56 -22.68 re S BT 31.19 668.51 Td (APTT) Tj ET
+155.91 683.15 85.04 -22.68 re S BT 158.74 668.51 Td (30.8) Tj ET
+28.35 660.47 127.56 -22.68 re S BT 31.19 645.83 Td (PT) Tj ET
+155.91 660.47 85.04 -22.68 re S BT 158.74 645.83 Td (14.5) Tj ET
+28.35 637.79 127.56 -22.68 re S BT 31.19 623.15 Td (Fibrinogen) Tj ET
+155.91 637.79 85.04 -22.68 re S BT 158.74 623.15 Td (2.65) Tj ET
+28.35 615.11 127.56 -22.68 re S BT 31.19 600.48 Td (PTI%) Tj ET
+155.91 615.11 85.04 -22.68 re S BT 158.74 600.48 Td (82) Tj ET
+28.35 592.44 127.56 -22.68 re S BT 31.19 577.80 Td (INR) Tj ET
+155.91 592.44 85.04 -22.68 re S BT 158.74 577.80 Td (1.13) Tj ET
+BT /F1 12.00 Tf ET
+BT 31.19 540.65 Td (5. Electrolytes & Minerals) Tj ET
+BT /F2 11.00 Tf ET
+28.35 530.08 127.56 -22.68 re S BT 31.19 515.44 Td (Calcium) Tj ET
+155.91 530.08 85.04 -22.68 re S BT 158.74 515.44 Td (1.18) Tj ET
+28.35 507.40 127.56 -22.68 re S BT 31.19 492.76 Td (Magnesium) Tj ET
+155.91 507.40 85.04 -22.68 re S BT 158.74 492.76 Td (0.80) Tj ET
+BT /F1 12.00 Tf ET
+BT 31.19 452.77 Td (Final Summary) Tj ET
+BT /F2 11.00 Tf ET
+BT 31.19 427.56 Td (- Moderate Vitamin D deficiency, recommend supplementation.) Tj ET
+BT 31.19 404.89 Td (- Electrolytes, thyroid, and coagulation panels are within normal limits.) Tj ET
+
+Q
+
+q
+0.0 0.0 612 792 re
+W
+n
+1 0 0 1 0 0 cm
+BT
+/F1-0 12 Tf
+14.4 TL
+ET
+Q
+
+
+endstream
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000015 00000 n 
+0000000054 00000 n 
+0000000120 00000 n 
+0000000169 00000 n 
+0000000397 00000 n 
+0000000499 00000 n 
+0000000606 00000 n 
+0000000703 00000 n 
+0000000808 00000 n 
+0000003900 00000 n 
+0000004119 00000 n 
+0000004227 00000 n 
+trailer
+<<
+/Size 13
+/Root 3 0 R
+/Info 1 0 R
+>>
+startxref
+6276
+%%EOF

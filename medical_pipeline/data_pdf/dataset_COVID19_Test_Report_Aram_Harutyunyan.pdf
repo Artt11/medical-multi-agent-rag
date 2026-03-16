@@ -1,0 +1,152 @@
+%PDF-1.3
+%‚„œ”
+1 0 obj
+<<
+/Producer (pypdf)
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Count 1
+/Kids [ 4 0 R ]
+>>
+endobj
+3 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+4 0 obj
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 5 0 R
+/F1-0 6 0 R
+/F2 7 0 R
+/F2-0 8 0 R
+>>
+/ProcSet [ /ImageB /ImageC /ImageI /PDF /Text ]
+>>
+/Contents 9 0 R
+/MediaBox [ 0 0 595.28 841.89 ]
+/Annots [ ]
+/Parent 2 0 R
+>>
+endobj
+5 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+>>
+endobj
+6 0 obj
+<<
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+7 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+>>
+endobj
+8 0 obj
+<<
+/BaseFont /Courier
+/Encoding /WinAnsiEncoding
+/Name /F2
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+9 0 obj
+<<
+/Length 1151
+>>
+stream
+q
+2 J
+0.57 w
+BT /F1 16.00 Tf ET
+BT 214.07 794.57 Td (COVID-19 Test Report) Tj ET
+BT /F2 12.00 Tf ET
+BT 31.19 739.07 Td (Name:) Tj ET
+BT 172.92 739.07 Td (Aram Harutyunyan) Tj ET
+BT 31.19 710.73 Td (Date of Birth:) Tj ET
+BT 172.92 710.73 Td (12.06.1985) Tj ET
+BT 31.19 682.38 Td (ID:) Tj ET
+BT 172.92 682.38 Td (COVID-2025-001247) Tj ET
+BT 31.19 654.03 Td (Email:) Tj ET
+BT 172.92 654.03 Td (aram.harutyunyan@example.com) Tj ET
+BT 31.19 625.69 Td (Phone:) Tj ET
+BT 172.92 625.69 Td (+374 91 123456) Tj ET
+BT 31.19 597.34 Td (Test Date:) Tj ET
+BT 172.92 597.34 Td (2025-11-24) Tj ET
+BT 31.19 569.00 Td (Result:) Tj ET
+BT 172.92 569.00 Td (Negative) Tj ET
+BT 31.19 540.65 Td (Test Type:) Tj ET
+BT 172.92 540.65 Td (PCR Test) Tj ET
+BT 31.19 512.30 Td (Sample Taken:) Tj ET
+BT 172.92 512.30 Td (Nasopharyngeal swab) Tj ET
+BT 31.19 483.96 Td (Lab:) Tj ET
+BT 172.92 483.96 Td (Heratsi Clinical Laboratory) Tj ET
+BT 31.19 455.61 Td (Physician:) Tj ET
+BT 172.92 455.61 Td (Dr. Anna Davtyan) Tj ET
+
+Q
+
+q
+0.0 0.0 612 792 re
+W
+n
+1 0 0 1 0 0 cm
+BT
+/F1-0 12 Tf
+14.4 TL
+ET
+BT
+/F2-0 11 Tf
+13.2 TL
+ET
+BT
+1 0 0 1 40 760 Tm
+(SOCIAL\137CARD\137ID\072 657218) Tj
+T*
+ET
+Q
+
+
+endstream
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000015 00000 n 
+0000000054 00000 n 
+0000000113 00000 n 
+0000000162 00000 n 
+0000000390 00000 n 
+0000000492 00000 n 
+0000000599 00000 n 
+0000000696 00000 n 
+0000000801 00000 n 
+trailer
+<<
+/Size 10
+/Root 3 0 R
+/Info 1 0 R
+>>
+startxref
+2004
+%%EOF

@@ -1,0 +1,355 @@
+%PDF-1.3
+%‚„œ”
+1 0 obj
+<<
+/Producer (pypdf)
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Count 2
+/Kids [ 4 0 R 11 0 R ]
+>>
+endobj
+3 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+4 0 obj
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 5 0 R
+/F1-0 6 0 R
+/F2 7 0 R
+/F2-0 8 0 R
+/F3 9 0 R
+>>
+/ProcSet [ /ImageB /ImageC /ImageI /PDF /Text ]
+>>
+/Contents 10 0 R
+/MediaBox [ 0 0 595.28 841.89 ]
+/Annots [ ]
+/Parent 2 0 R
+>>
+endobj
+5 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+>>
+endobj
+6 0 obj
+<<
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+7 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+>>
+endobj
+8 0 obj
+<<
+/BaseFont /Courier
+/Encoding /WinAnsiEncoding
+/Name /F2
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+9 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+>>
+endobj
+10 0 obj
+<<
+/Length 5627
+>>
+stream
+q
+2 J
+0.57 w
+BT /F1 12.00 Tf ET
+BT 172.94 795.77 Td (Heratsi Clinical Laboratory - Medical Report) Tj ET
+BT /F1 14.00 Tf ET
+BT 31.19 752.65 Td (Patient: Poxosyan Vaxarsh) Tj ET
+BT /F2 12.00 Tf ET
+BT 31.19 724.90 Td (Date of Birth: 15.11.2000) Tj ET
+BT 31.19 696.55 Td (Report Date: 23.09.2025) Tj ET
+BT 31.19 668.21 Td (Doctor: Heratsi Lab Physician) Tj ET
+BT /F1 12.00 Tf ET
+BT 31.19 611.51 Td (1. Complete Blood Count \(CBC\) with Differential) Tj ET
+BT /F2 10.00 Tf ET
+28.35 595.27 141.73 -22.68 re S BT 89.49 580.93 Td (Test) Tj ET
+170.08 595.27 113.39 -22.68 re S BT 212.61 580.93 Td (Result) Tj ET
+283.47 595.27 170.08 -22.68 re S BT 329.32 580.93 Td (Reference Range) Tj ET
+453.55 595.27 85.04 -22.68 re S BT 484.68 580.93 Td (Units) Tj ET
+28.35 572.60 141.73 -22.68 re S BT 87.55 558.26 Td (WBC) Tj ET
+170.08 572.60 113.39 -22.68 re S BT 217.05 558.26 Td (4.86) Tj ET
+283.47 572.60 170.08 -22.68 re S BT 344.60 558.26 Td (4.10 - 10.0) Tj ET
+453.55 572.60 85.04 -22.68 re S BT 481.21 558.26 Td (10^9/L) Tj ET
+28.35 549.92 141.73 -22.68 re S BT 88.66 535.58 Td (RBC) Tj ET
+170.08 549.92 113.39 -22.68 re S BT 217.05 535.58 Td (4.75) Tj ET
+283.47 549.92 170.08 -22.68 re S BT 350.16 535.58 Td (4.2 - 5.4) Tj ET
+453.55 549.92 85.04 -22.68 re S BT 478.43 535.58 Td (10^12/L) Tj ET
+28.35 527.24 141.73 -22.68 re S BT 88.38 512.90 Td (HGB) Tj ET
+170.08 527.24 113.39 -22.68 re S BT 218.44 512.90 Td (138) Tj ET
+283.47 527.24 170.08 -22.68 re S BT 347.38 512.90 Td (120 - 150) Tj ET
+453.55 527.24 85.04 -22.68 re S BT 489.12 512.90 Td (g/L) Tj ET
+28.35 504.56 141.73 -22.68 re S BT 88.94 490.23 Td (HCT) Tj ET
+170.08 504.56 113.39 -22.68 re S BT 217.05 490.23 Td (40.6) Tj ET
+283.47 504.56 170.08 -22.68 re S BT 352.94 490.23 Td (36 - 50) Tj ET
+453.55 504.56 85.04 -22.68 re S BT 491.62 490.23 Td (%) Tj ET
+28.35 481.89 141.73 -22.68 re S BT 88.11 467.55 Td (MCV) Tj ET
+170.08 481.89 113.39 -22.68 re S BT 217.05 467.55 Td (85.3) Tj ET
+283.47 481.89 170.08 -22.68 re S BT 350.16 467.55 Td (80 - 100) Tj ET
+453.55 481.89 85.04 -22.68 re S BT 491.90 467.55 Td (fL) Tj ET
+28.35 459.21 141.73 -22.68 re S BT 87.83 444.87 Td (MCH) Tj ET
+170.08 459.21 113.39 -22.68 re S BT 217.05 444.87 Td (29.1) Tj ET
+283.47 459.21 170.08 -22.68 re S BT 352.94 444.87 Td (27 - 34) Tj ET
+453.55 459.21 85.04 -22.68 re S BT 490.51 444.87 Td (pg) Tj ET
+28.35 436.53 141.73 -22.68 re S BT 84.22 422.19 Td (MCHC) Tj ET
+170.08 436.53 113.39 -22.68 re S BT 218.44 422.19 Td (341) Tj ET
+283.47 436.53 170.08 -22.68 re S BT 347.38 422.19 Td (320 - 360) Tj ET
+453.55 436.53 85.04 -22.68 re S BT 489.12 422.19 Td (g/L) Tj ET
+28.35 413.85 141.73 -22.68 re S BT 90.05 399.52 Td (PLT) Tj ET
+170.08 413.85 113.39 -22.68 re S BT 218.44 399.52 Td (237) Tj ET
+283.47 413.85 170.08 -22.68 re S BT 347.38 399.52 Td (150 - 400) Tj ET
+453.55 413.85 85.04 -22.68 re S BT 481.21 399.52 Td (10^9/L) Tj ET
+28.35 391.18 141.73 -22.68 re S BT 81.16 376.84 Td (NEUT%) Tj ET
+170.08 391.18 113.39 -22.68 re S BT 217.05 376.84 Td (57.7) Tj ET
+283.47 391.18 170.08 -22.68 re S BT 352.94 376.84 Td (45 - 70) Tj ET
+453.55 391.18 85.04 -22.68 re S BT 491.62 376.84 Td (%) Tj ET
+28.35 368.50 141.73 -22.68 re S BT 77.55 354.16 Td (LYMPH%) Tj ET
+170.08 368.50 113.39 -22.68 re S BT 217.05 354.16 Td (34.4) Tj ET
+283.47 368.50 170.08 -22.68 re S BT 352.94 354.16 Td (20 - 45) Tj ET
+453.55 368.50 85.04 -22.68 re S BT 491.62 354.16 Td (%) Tj ET
+28.35 345.82 141.73 -22.68 re S BT 79.22 331.48 Td (MONO%) Tj ET
+170.08 345.82 113.39 -22.68 re S BT 219.83 331.48 Td (5.6) Tj ET
+283.47 345.82 170.08 -22.68 re S BT 358.50 331.48 Td (2 - 8) Tj ET
+453.55 345.82 85.04 -22.68 re S BT 491.62 331.48 Td (%) Tj ET
+28.35 323.15 141.73 -22.68 re S BT 84.21 308.81 Td (EOS%) Tj ET
+170.08 323.15 113.39 -22.68 re S BT 219.83 308.81 Td (2.3) Tj ET
+283.47 323.15 170.08 -22.68 re S BT 358.50 308.81 Td (1 - 6) Tj ET
+453.55 323.15 85.04 -22.68 re S BT 491.62 308.81 Td (%) Tj ET
+28.35 300.47 141.73 -22.68 re S BT 80.88 286.13 Td (BASO%) Tj ET
+170.08 300.47 113.39 -22.68 re S BT 219.83 286.13 Td (0.0) Tj ET
+283.47 300.47 170.08 -22.68 re S BT 358.50 286.13 Td (0 - 1) Tj ET
+453.55 300.47 85.04 -22.68 re S BT 491.62 286.13 Td (%) Tj ET
+28.35 277.79 141.73 -22.68 re S BT 78.67 263.45 Td (RDW-CV) Tj ET
+170.08 277.79 113.39 -22.68 re S BT 215.66 263.45 Td (14.6 ) Tj ET
+283.47 277.79 170.08 -22.68 re S BT 355.72 263.45 Td (9 - 14) Tj ET
+453.55 277.79 85.04 -22.68 re S BT 491.62 263.45 Td (%) Tj ET
+28.35 255.11 141.73 -22.68 re S BT 88.38 240.78 Td (MPV) Tj ET
+170.08 255.11 113.39 -22.68 re S BT 215.66 240.78 Td (11.4 ) Tj ET
+283.47 255.11 170.08 -22.68 re S BT 355.72 240.78 Td (8 - 12) Tj ET
+453.55 255.11 85.04 -22.68 re S BT 491.90 240.78 Td (fL) Tj ET
+BT /F1 12.00 Tf ET
+BT 31.19 191.99 Td (2. Erythrocyte Sedimentation Rate \(ESR\)) Tj ET
+BT /F2 10.00 Tf ET
+28.35 175.74 198.43 -22.68 re S BT 117.28 161.41 Td (ESR) Tj ET
+226.78 175.74 113.39 -22.68 re S BT 280.69 161.41 Td (9) Tj ET
+340.16 175.74 170.08 -22.68 re S BT 416.72 161.41 Td (<15) Tj ET
+510.24 175.74 56.69 -22.68 re S BT 526.09 161.41 Td (mm/h) Tj ET
+BT /F1 12.00 Tf ET
+BT 31.19 112.62 Td (3. Thyroid & Vitamin Panel) Tj ET
+BT /F2 10.00 Tf ET
+28.35 102.04 141.73 -22.68 re S BT 89.49 87.71 Td (Test) Tj ET
+170.08 102.04 113.39 -22.68 re S BT 212.61 87.71 Td (Result) Tj ET
+283.47 102.04 170.08 -22.68 re S BT 329.32 87.71 Td (Reference Range) Tj ET
+453.55 102.04 85.04 -22.68 re S BT 484.68 87.71 Td (Units) Tj ET
+BT /F3 8.00 Tf ET
+BT 284.96 25.95 Td (Page 1) Tj ET
+
+Q
+
+q
+0.0 0.0 612 792 re
+W
+n
+1 0 0 1 0 0 cm
+BT
+/F1-0 12 Tf
+14.4 TL
+ET
+BT
+/F2-0 11 Tf
+13.2 TL
+ET
+BT
+1 0 0 1 40 760 Tm
+(SOCIAL\137CARD\137ID\072 238655) Tj
+T*
+ET
+Q
+
+
+endstream
+endobj
+11 0 obj
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 5 0 R
+/F1-0 12 0 R
+/F2 7 0 R
+/F3 9 0 R
+>>
+/ProcSet [ /ImageB /ImageC /ImageI /PDF /Text ]
+>>
+/Contents 13 0 R
+/MediaBox [ 0 0 595.28 841.89 ]
+/Annots [ ]
+/Parent 2 0 R
+>>
+endobj
+12 0 obj
+<<
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+13 0 obj
+<<
+/Length 4444
+>>
+stream
+q
+2 J
+0.57 w
+BT /F2 10.00 Tf ET
+BT /F1 12.00 Tf ET
+BT 172.94 795.77 Td (Heratsi Clinical Laboratory - Medical Report) Tj ET
+BT /F2 10.00 Tf ET
+28.35 771.02 141.73 -22.68 re S BT 89.22 756.68 Td (TSH) Tj ET
+170.08 771.02 113.39 -22.68 re S BT 217.05 756.68 Td (1.38) Tj ET
+283.47 771.02 170.08 -22.68 re S BT 341.82 756.68 Td (0.270 - 4.20) Tj ET
+453.55 771.02 85.04 -22.68 re S BT 479.95 756.68 Td (uIU/mL) Tj ET
+28.35 748.34 141.73 -22.68 re S BT 72.26 734.00 Td (Vitamin B12) Tj ET
+170.08 748.34 113.39 -22.68 re S BT 214.27 734.00 Td (288.6) Tj ET
+283.47 748.34 170.08 -22.68 re S BT 347.38 734.00 Td (197 - 771) Tj ET
+453.55 748.34 85.04 -22.68 re S BT 482.17 734.00 Td (pg/mL) Tj ET
+28.35 725.67 141.73 -22.68 re S BT 77.55 711.33 Td (Vitamin D) Tj ET
+170.08 725.67 113.39 -22.68 re S BT 212.88 711.33 Td (11.44 ) Tj ET
+283.47 725.67 170.08 -22.68 re S BT 352.94 711.33 Td (30 - 85) Tj ET
+453.55 725.67 85.04 -22.68 re S BT 482.17 711.33 Td (ng/mL) Tj ET
+28.35 702.99 141.73 -22.68 re S BT 83.66 688.65 Td (Ferritin) Tj ET
+170.08 702.99 113.39 -22.68 re S BT 214.27 688.65 Td (46.89) Tj ET
+283.47 702.99 170.08 -22.68 re S BT 345.99 688.65 Td (13.0 - 150) Tj ET
+453.55 702.99 85.04 -22.68 re S BT 482.17 688.65 Td (ng/mL) Tj ET
+BT /F1 12.00 Tf ET
+BT 31.19 639.86 Td (4. Coagulation Profile) Tj ET
+BT /F2 10.00 Tf ET
+28.35 629.29 141.73 -22.68 re S BT 89.49 614.95 Td (Test) Tj ET
+170.08 629.29 113.39 -22.68 re S BT 212.61 614.95 Td (Result) Tj ET
+283.47 629.29 170.08 -22.68 re S BT 329.32 614.95 Td (Reference Range) Tj ET
+453.55 629.29 85.04 -22.68 re S BT 484.68 614.95 Td (Units) Tj ET
+28.35 606.61 141.73 -22.68 re S BT 86.44 592.27 Td (APTT) Tj ET
+170.08 606.61 113.39 -22.68 re S BT 217.05 592.27 Td (31.5) Tj ET
+283.47 606.61 170.08 -22.68 re S BT 344.60 592.27 Td (25.0 - 40.0) Tj ET
+453.55 606.61 85.04 -22.68 re S BT 488.29 592.27 Td (sec) Tj ET
+28.35 583.93 141.73 -22.68 re S BT 92.83 569.60 Td (PT) Tj ET
+170.08 583.93 113.39 -22.68 re S BT 217.05 569.60 Td (15.2) Tj ET
+283.47 583.93 170.08 -22.68 re S BT 344.60 569.60 Td (12.0 - 16.0) Tj ET
+453.55 583.93 85.04 -22.68 re S BT 488.29 569.60 Td (sec) Tj ET
+28.35 561.26 141.73 -22.68 re S BT 75.60 546.92 Td (Fibrinogen) Tj ET
+170.08 561.26 113.39 -22.68 re S BT 217.05 546.92 Td (2.76) Tj ET
+283.47 561.26 170.08 -22.68 re S BT 350.16 546.92 Td (2.0 - 4.0) Tj ET
+453.55 561.26 85.04 -22.68 re S BT 489.12 546.92 Td (g/L) Tj ET
+28.35 538.58 141.73 -22.68 re S BT 86.99 524.24 Td (PTI%) Tj ET
+170.08 538.58 113.39 -22.68 re S BT 221.22 524.24 Td (80) Tj ET
+283.47 538.58 170.08 -22.68 re S BT 350.16 524.24 Td (70 - 120) Tj ET
+453.55 538.58 85.04 -22.68 re S BT 491.62 524.24 Td (%) Tj ET
+28.35 515.90 141.73 -22.68 re S BT 90.61 501.56 Td (INR) Tj ET
+170.08 515.90 113.39 -22.68 re S BT 217.05 501.56 Td (1.16) Tj ET
+283.47 515.90 170.08 -22.68 re S BT 350.16 501.56 Td (0.8 - 1.8) Tj ET
+453.55 515.90 85.04 -22.68 re S 
+BT /F1 12.00 Tf ET
+BT 31.19 452.77 Td (5. Electrolytes & Minerals) Tj ET
+BT /F2 10.00 Tf ET
+28.35 442.20 141.73 -22.68 re S BT 89.49 427.86 Td (Test) Tj ET
+170.08 442.20 113.39 -22.68 re S BT 212.61 427.86 Td (Result) Tj ET
+283.47 442.20 170.08 -22.68 re S BT 329.32 427.86 Td (Reference Range) Tj ET
+453.55 442.20 85.04 -22.68 re S BT 484.68 427.86 Td (Units) Tj ET
+28.35 419.52 141.73 -22.68 re S BT 64.35 405.19 Td (Calcium \(Ca2+\)) Tj ET
+170.08 419.52 113.39 -22.68 re S BT 214.27 405.19 Td (1.182) Tj ET
+283.47 419.52 170.08 -22.68 re S BT 344.60 405.19 Td (1.05 - 1.25) Tj ET
+453.55 419.52 85.04 -22.68 re S BT 479.68 405.19 Td (mmol/L) Tj ET
+28.35 396.85 141.73 -22.68 re S BT 61.71 382.51 Td (Magnesium \(Mg\)) Tj ET
+170.08 396.85 113.39 -22.68 re S BT 217.05 382.51 Td (0.82) Tj ET
+283.47 396.85 170.08 -22.68 re S BT 347.38 382.51 Td (0.7 - 1.07) Tj ET
+453.55 396.85 85.04 -22.68 re S BT 479.68 382.51 Td (mmol/L) Tj ET
+BT /F1 12.00 Tf ET
+BT 31.19 333.72 Td (Final Summary) Tj ET
+BT /F2 11.00 Tf ET
+BT 31.19 308.51 Td (- General blood indices within normal range.) Tj ET
+BT 31.19 285.83 Td (- Slight macrocytic variation \(\(elevated\) RDW-CV\), needs monitoring.) Tj ET
+BT 31.19 263.15 Td (- Vitamin D deficiency detected; consider supplementation.) Tj ET
+BT 31.19 240.48 Td (- Electrolytes, thyroid, coagulation panels are within normal limits.) Tj ET
+BT 31.19 217.80 Td (- No signs of anemia or infection.) Tj ET
+BT /F3 8.00 Tf ET
+BT 284.96 25.95 Td (Page 2) Tj ET
+
+Q
+
+q
+0.0 0.0 612 792 re
+W
+n
+1 0 0 1 0 0 cm
+BT
+/F1-0 12 Tf
+14.4 TL
+ET
+Q
+
+
+endstream
+endobj
+xref
+0 14
+0000000000 65535 f 
+0000000015 00000 n 
+0000000054 00000 n 
+0000000120 00000 n 
+0000000169 00000 n 
+0000000408 00000 n 
+0000000510 00000 n 
+0000000617 00000 n 
+0000000714 00000 n 
+0000000819 00000 n 
+0000000924 00000 n 
+0000006604 00000 n 
+0000006833 00000 n 
+0000006941 00000 n 
+trailer
+<<
+/Size 14
+/Root 3 0 R
+/Info 1 0 R
+>>
+startxref
+11438
+%%EOF
