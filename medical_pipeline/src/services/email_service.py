@@ -48,3 +48,6 @@ def send_smtp_email(to_email: str, subject: str, body: str) -> str:
         return "Հաջողությամբ ուղարկվեց"
     except Exception as e:
         return f"SMTP Սխալ: {str(e)}"
+
+
+# EMAILI funkcianery sax stex berel

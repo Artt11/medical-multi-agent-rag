@@ -2,10 +2,12 @@ from typing import Dict, Any, Optional, Tuple
 import re
 from pydantic import BaseModel, Field
 from src.core.config import llm
-from src.database.connection import SessionLocal
+from src.database.connection import get_db
 from src.database.models import PatientModel
 from src.services.email_service import send_smtp_email
 from sqlalchemy import func
+
+SessionLocal = next(get_db())
 
 
 class EmailSchema(BaseModel):
@@ -54,11 +56,13 @@ def _find_patient_email(
 
     return None, None
 
+# miayn es mna ste
+
 
 def email_reminder_node(state: Dict[str, Any]) -> Dict[str, Any]:
     print("--- 📧 EMAIL REMINDER AGENT (Agent 4) ---")
 
-    db = SessionLocal()
+    db = SessionLocal
     patient_id = state.get("patient_id")
     query = state.get("query", "")
 
@@ -80,7 +84,7 @@ def email_reminder_node(state: Dict[str, Any]) -> Dict[str, Any]:
     - Priority 1: Use the Database Email.
     - Priority 2: If DB email is missing, extract from query.
     - If no email found at all, use 'NONE'.
-    - Extract patient_name and patient_id if present.
+    - Extract patient_name + DOB and patient_id  if present.
     """
 
     try:

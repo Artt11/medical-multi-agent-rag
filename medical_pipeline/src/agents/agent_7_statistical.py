@@ -66,14 +66,15 @@ from typing import Dict, Any
 import json
 from sqlalchemy import text
 from src.core.config import llm
-from src.database.connection import SessionLocal
+from src.database.connection import get_db
 from src.services.source_link_service import build_pdf_urls, format_source_links
+SessionLocal = next(get_db())
 
 
 def statistical_filter_node(state: Dict[str, Any]) -> Dict[str, Any]:
     print("--- 📊 STATISTICAL FILTER AGENT (Agent 7) ---")
 
-    db = SessionLocal()
+    db = SessionLocal
 
     # 1. LLM generates SQL
     system_prompt = """
@@ -344,7 +345,8 @@ Key Findings:
             lines.append(
                 f"Examination Type: {normalize_value(row.get('examination_type'))}")
             lines.append(f"Diagnosis: {normalize_value(row.get('diagnosis'))}")
-            lines.append(f"Conclusion: {normalize_value(row.get('conclusion'))}")
+            lines.append(
+                f"Conclusion: {normalize_value(row.get('conclusion'))}")
             lines.append(
                 f"Recommendations: {normalize_value(row.get('recommendations'))}")
             lines.append("")

@@ -66,7 +66,8 @@ def build_pdf_urls(
 ) -> List[str]:
     urls: List[str] = []
     for doc_hash in doc_hashes:
-        url = build_pdf_url(doc_hash, container_name=container_name, use_sas=use_sas)
+        url = build_pdf_url(
+            doc_hash, container_name=container_name, use_sas=use_sas)
         if url:
             urls.append(url)
     return urls

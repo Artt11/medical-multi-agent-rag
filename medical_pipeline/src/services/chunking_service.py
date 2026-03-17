@@ -8,8 +8,8 @@ from src.models.elements import ElementType
 class ChunkingService(IChunkingService):
     def __init__(self):
         self.text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=800,
-            chunk_overlap=100,
+            chunk_size=500,
+            chunk_overlap=50,
             separators=["\n\n", "\n", ". ", " ", ""]
         )
 
@@ -37,7 +37,7 @@ class ChunkingService(IChunkingService):
             if not text_content:
                 return
 
-            if len(text_content) < 1000:
+            if len(text_content) < 500:
                 chunks.append(MedicalChunk(
                     page_content=text_content,
                     metadata={

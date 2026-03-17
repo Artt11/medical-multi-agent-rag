@@ -28,6 +28,7 @@ BEGIN
         full_json NVARCHAR(MAX),
         
         document_hash VARCHAR(64) UNIQUE 
+        -- url_doc NVARCHAR(MAX),
     );
 END
 

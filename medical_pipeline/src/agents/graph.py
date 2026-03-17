@@ -33,6 +33,7 @@ def route_next_node(state: AgentState):
     Safe router that ensures the orchestrator returns a valid agent.
     If an invalid value appears, fallback to summarizer_agent.
     """
+    # steice chexac agentnery voronq chkan jnjel
     valid_nodes = {
         "summarizer_agent",
         "disease_cohort_agent",
@@ -52,6 +53,7 @@ def route_next_node(state: AgentState):
     return next_node
 
 
+# steice chexac agentnery voronq chkan jnjel
 workflow.add_conditional_edges(
     "orchestrator",
     route_next_node,
