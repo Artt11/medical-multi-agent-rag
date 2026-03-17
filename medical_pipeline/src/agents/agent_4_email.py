@@ -1,99 +1,127 @@
-# from typing import Dict, Any
-# from src.core.config import llm
-
-
-# def email_reminder_node(state: Dict[str, Any]) -> Dict[str, Any]:
-#     print("--- 📧 EMAIL REMINDER AGENT (Agent 4) ---")
-
-#     system_prompt = (
-#         "You are a Healthcare Communication Coordinator. Your task is to draft "
-#         "a professional, empathetic, and clear email to a patient regarding "
-#         "medical reminders, such as vaccinations, upcoming tests, or follow-ups.\n\n"
-#         "Guidelines:\n"
-#         "1. Maintain patient confidentiality.\n"
-#         "2. Ensure the tone is polite, clinical, and actionable.\n"
-#         "3. Output ONLY the email subject and body. Do not include external commentary.\n"
-#         "4. Use placeholders like [Patient Name] or [Date] if exact details are missing."
-#     )
-
-#     response = llm.invoke([
-#         ("system", system_prompt),
-#         ("human",
-#          f"Draft a medical reminder email based on this request: {state['query']}")
-#     ])
-
-#     return {
-#         "final_answer": f"Email Draft Prepared:\n\n{response.content}",
-#         "email_status": "Drafted"
-#     }
-from typing import Dict, Any
+from typing import Dict, Any, Optional, Tuple
+import re
+from pydantic import BaseModel, Field
 from src.core.config import llm
+from src.database.connection import SessionLocal
+from src.database.models import PatientModel
+from src.services.email_service import send_smtp_email
+from sqlalchemy import func
+
+
+class EmailSchema(BaseModel):
+    recipient: str = Field(..., description="The target email address")
+    subject: str = Field(..., description="Professional email subject")
+    body: str = Field(..., description="The professional email body text")
+    patient_name: Optional[str] = Field(
+        None, description="Patient name if present")
+    patient_id: Optional[str] = Field(
+        None, description="Patient ID if present")
+
+
+EMAIL_REGEX = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
+
+
+def _extract_email(text: str) -> Optional[str]:
+    if not text:
+        return None
+    match = EMAIL_REGEX.search(text)
+    return match.group(0) if match else None
+
+
+def _find_patient_email(
+    db: SessionLocal,
+    patient_id: Optional[str],
+    patient_name: Optional[str],
+) -> Tuple[Optional[str], Optional[str]]:
+    if patient_id:
+        patient = db.query(PatientModel).filter(
+            (PatientModel.patient_id == patient_id)
+            | (PatientModel.social_card == patient_id)
+        ).first()
+        if patient and patient.email:
+            return patient.email, None
+
+    if patient_name:
+        name_value = patient_name.strip()
+        if name_value:
+            matches = db.query(PatientModel).filter(
+                func.lower(PatientModel.name).like(f"%{name_value.lower()}%")
+            ).all()
+            if len(matches) > 1:
+                return None, "MULTIPLE_MATCHES"
+            if len(matches) == 1:
+                return matches[0].email, None
+
+    return None, None
 
 
 def email_reminder_node(state: Dict[str, Any]) -> Dict[str, Any]:
     print("--- 📧 EMAIL REMINDER AGENT (Agent 4) ---")
 
-    system_prompt = """
-ROLE
-You are a Healthcare Communication Coordinator responsible for drafting
-professional patient reminder emails related to healthcare activities.
+    db = SessionLocal()
+    patient_id = state.get("patient_id")
+    query = state.get("query", "")
 
-TASK
-Generate a clear, empathetic, and professional reminder email for a patient
-regarding medical matters such as vaccinations, follow-up visits,
-diagnostic tests, or routine checkups.
+    db_email = None
+    patient_name = None
+    if patient_id:
+        db_email, _ = _find_patient_email(db, patient_id, None)
 
---------------------------------------------------
+    structured_llm = llm.with_structured_output(EmailSchema)
 
-COMMUNICATION GUIDELINES
+    system_prompt = f"""
+    You are a Medical Communication Assistant.
+    Draft a clinical reminder based on the user request.
+    
+    CONTEXT:
+    - Database Email: {db_email if db_email else "Not found in DB"}
+    
+    INSTRUCTIONS:
+    - Priority 1: Use the Database Email.
+    - Priority 2: If DB email is missing, extract from query.
+    - If no email found at all, use 'NONE'.
+    - Extract patient_name and patient_id if present.
+    """
 
-1. PATIENT PRIVACY
-Maintain strict patient confidentiality.
-Do not include sensitive medical details unless explicitly provided.
+    try:
+        res = structured_llm.invoke([
+            ("system", system_prompt),
+            ("human", f"Request: {query}")
+        ])
 
-2. PROFESSIONAL TONE
-The email must be:
-- polite
-- supportive
-- clear
-- professional
+        patient_name = res.patient_name
+        candidate_id = patient_id or res.patient_id
 
-3. ACTIONABLE MESSAGE
-Clearly communicate what the patient should do next
-(e.g., schedule an appointment, attend a visit, or complete a test).
+        db_email, db_error = _find_patient_email(
+            db, candidate_id, patient_name)
 
-4. MISSING INFORMATION
-If required details are missing, use placeholders such as:
-[Patient Name]
-[Clinic Name]
-[Date]
-[Appointment Time]
-[Contact Information]
+        if db_error == "MULTIPLE_MATCHES":
+            send_status = "Չուղարկվեց (մի քանի պացիենտ են համապատասխանում անունին)"
+            final_answer = "Խնդրում ենք նշել ավելի կոնկրետ տվյալ (օր. ծննդյան տարեթիվ կամ ID):"
+            return {
+                "final_answer": final_answer,
+                "email_status": send_status
+            }
 
-5. DO NOT INVENT MEDICAL INFORMATION
-Only use the information provided in the request.
+        recipient = db_email or (
+            res.recipient if res.recipient != "NONE" else None)
+        if not recipient:
+            recipient = _extract_email(query)
 
---------------------------------------------------
+        if recipient and "@" in recipient:
+            send_status = send_smtp_email(recipient, res.subject, res.body)
+        else:
+            send_status = "Չուղարկվեց (Էլ. հասցեն բացակայում է)"
 
-OUTPUT FORMAT
+        final_answer = f"**Կարգավիճակ:** {send_status}\n\n**Նամակ:**\n{res.body}"
 
-Subject:
-<email subject line>
-
-Body:
-<formal healthcare email message>
-
-Return ONLY the subject and body.
-Do not include explanations or additional commentary.
-"""
-
-    response = llm.invoke([
-        ("system", system_prompt),
-        ("human",
-         f"Draft a medical reminder email based on this request: {state['query']}")
-    ])
+    except Exception as e:
+        send_status = f"Error: {str(e)}"
+        final_answer = "Տեղի է ունեցել սխալ նամակի մշակման ժամանակ:"
+    finally:
+        db.close()
 
     return {
-        "final_answer": f"Email Draft Prepared:\n\n{response.content}",
-        "email_status": "Drafted"
+        "final_answer": final_answer,
+        "email_status": send_status
     }

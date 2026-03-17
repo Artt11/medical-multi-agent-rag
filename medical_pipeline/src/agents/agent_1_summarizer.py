@@ -12,22 +12,11 @@ def summarizer_node(state: Dict[str, Any]) -> Dict[str, Any]:
 
     search_params = MedicalSearchQuery(
         query_text=state["query"],
-        patient_id=state.get("patient_id"),
+        patient_id=state.get("patient_id", ""),
         top_k=5
     )
     chunks = retriever.search(search_params)
     context = "\n\n".join([c.page_content for c in chunks])
-
-    # system_prompt = (
-    #     "You are an Expert Clinical Summarizer. Your task is to provide a concise, "
-    #     "accurate, and highly readable summary of the patient's medical examination "
-    #     "report based exclusively on the provided context.\n\n"
-    #     "Guidelines:\n"
-    #     "1. Highlight the primary diagnosis, critical abnormal laboratory values, and the physician's conclusion.\n"
-    #     "2. Do not invent or infer data not present in the text (Zero Hallucination).\n"
-    #     "3. Use clear clinical terminology suitable for a medical professional.\n"
-    #     "4. If the context is empty or lacks sufficient data, state: 'Insufficient medical records available to provide a summary.'"
-    # )
     system_prompt = (
         """ROLE
 You are a ** Clinical Report Summarization Agent ** operating inside a Retrieval-Augmented Generation(RAG) system.

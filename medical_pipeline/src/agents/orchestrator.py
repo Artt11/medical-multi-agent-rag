@@ -120,7 +120,7 @@ Return the routing decision in the structured format required by the system.
 
     decision = structured_llm.invoke([
         ("system", system_prompt),
-        ("human", state["query"]) 
+        ("human", state["query"])
     ])
 
     resolved_patient_id = state.get(

@@ -15,7 +15,6 @@ class ChatResponse(BaseModel):
     answer: str
 
 
-# Ուշադրություն դարձրու նոր tag-ին՝ "AI Agents Chat"
 router = APIRouter(prefix="/v1/medical", tags=["AI Agents Chat"])
 
 
@@ -31,7 +30,7 @@ async def ask_medical_agents(request: ChatRequest):
             "sql_results": []
         }
 
-        print(f"🧠 Սկսում ենք մշակել հարցումը: {request.query}")
+        print(f"Սկսում ենք մշակել հարցումը: {request.query}")
         thread_id = request.patient_id or str(uuid.uuid4())
         result = medical_graph.invoke(
             initial_state,

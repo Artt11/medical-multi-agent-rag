@@ -1,33 +1,3 @@
-# from typing import Dict, Any
-# from src.core.config import llm
-
-
-# def auto_notifier_node(state: Dict[str, Any]) -> Dict[str, Any]:
-#     print("--- 🔔 AUTO NOTIFIER AGENT (Agent 8) ---")
-
-#     system_prompt = (
-#         "You are a Clinical Automated Alert Manager. Your responsibility is to process "
-#         "requests for setting up automated medical notifications, background alerts, "
-#         "or recurring patient monitoring tasks.\n\n"
-#         "Guidelines:\n"
-#         "1. Extract the specific conditions for the alert (e.g., laboratory thresholds, timeframes, or disease triggers).\n"
-#         "2. Identify the target of the notification (e.g., specific patient ID, medical staff, or a cohort).\n"
-#         "3. Output a structured confirmation detailing the active alert configuration.\n"
-#         "4. Do not execute the alert immediately; only confirm its configuration for the system's background worker.\n"
-#         "5. Maintain strict medical data privacy and a formal clinical tone."
-#     )
-
-#     human_message = f"Configure automated alert based on this request: {state['query']}"
-
-#     response = llm.invoke([
-#         ("system", system_prompt),
-#         ("human", human_message)
-#     ])
-
-#     return {
-#         "final_answer": response.content,
-#         "email_status": "Alert Configured"
-#     }
 from typing import Dict, Any
 from src.core.config import llm
 

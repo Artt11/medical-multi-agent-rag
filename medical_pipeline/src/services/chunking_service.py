@@ -65,7 +65,7 @@ class ChunkingService(IChunkingService):
             if not isinstance(el, dict):
                 try:
                     el = el.dict()
-                except:
+                except (Exception):
                     continue
 
             content = str(el.get("content", "")).strip()
