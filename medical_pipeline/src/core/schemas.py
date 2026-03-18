@@ -1,16 +1,13 @@
 from pydantic import BaseModel, Field
 from typing import Optional, Literal, Any, Dict
 
-# jnjel agentnery voronq chkan 
 AgentChoices = Literal[
     "summarizer_agent",
     "disease_cohort_agent",
     "temporal_disease_agent",
     "email_reminder_agent",
     "comparative_agent",
-    "source_retriever_agent",
-    "statistical_filter_agent",
-    "auto_notifier_agent"
+    "statistical_filter_agent"
 ]
 
 

@@ -49,13 +49,7 @@ Use when the user asks to compare a patient's condition across time.
 Example:
 "Compare patient 203 vitamin D levels between 2022 and 2024"
 
-6. source_retriever_agent
-Use when the user asks for raw document links or files.
-
-Example:
-"Show original lab reports for patient 110"
-
-7. statistical_filter_agent
+6. statistical_filter_agent
 Use when the user asks complex statistical queries or cohort filtering.
 
 Example:
@@ -63,12 +57,6 @@ Example:
 "Find patients named Victor"
 "Find patients named Victor born in 2000"
 "Show Colak medical analysis"
-
-8. auto_notifier_agent
-Use when the user wants to configure automated alerts or monitoring.
-
-Example:
-"Notify me if a patient’s glucose exceeds 200"
 
 --------------------------------------------------
 
@@ -86,11 +74,18 @@ If a value is not present, return null.
 
 ROUTING HINTS
 
+PCR test is for COVID diagnosis.
+
 If the user asks to find patients by name or by birth year/DOB,
 route to statistical_filter_agent.
 
-Only route to source_retriever_agent when the user explicitly asks for
-source files, original documents, PDFs, download links, or raw report files.
+If the user explicitly asks for source files, original documents, PDFs,
+download links, or raw report files, route to statistical_filter_agent
+so it can return document references.
+
+If the user asks to configure automated alerts or monitoring,
+route to email_reminder_agent.
+
 If the user asks to show or summarize a patient's medical analysis/results
 by name (without requesting files), route to statistical_filter_agent.
 
@@ -105,9 +100,7 @@ disease_cohort_agent
 temporal_disease_agent
 email_reminder_agent
 comparative_agent
-source_retriever_agent
 statistical_filter_agent
-auto_notifier_agent
 
 Never invent new agent names.
 

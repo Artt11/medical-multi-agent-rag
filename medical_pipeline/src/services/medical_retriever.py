@@ -9,7 +9,7 @@ from typing import List
 
 
 class HybridMedicalRetriever(IBaseRetriever):
-    def __init__(self, index_name="medical-reports-index"):
+    def __init__(self, index_name="medical-index"):
         self.endpoint = os.getenv("AZURE_SEARCH_ENDPOINT")
         self.key = os.getenv("AZURE_SEARCH_KEY")
         self.credential = AzureKeyCredential(self.key)

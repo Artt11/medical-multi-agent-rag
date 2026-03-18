@@ -1,18 +1,18 @@
-import hashlib
-from fastapi import APIRouter, HTTPException, File, UploadFile, Depends
-from sqlalchemy.orm import Session
-
-from src.database.connection import get_db
-
-from src.core.medical_orchestrator import MedicalRAGOrchestrator
-
-from src.database.sql_repository import SqlDatabaseRepository
-from src.services.pdf_parser import PdfPlumberParser
-from src.services.data_processor import MedicalProcessor
-from src.services.chunking_service import ChunkingService
-from src.services.azure_storage_service import AzureMedicalStorage
-from src.services.vector_service import AzureVectorService
 from src.services.hash_service import BinaryHashService
+from src.services.vector_service import AzureVectorService
+from src.services.azure_storage_service import AzureMedicalStorage
+from src.services.chunking_service import ChunkingService
+from src.services.data_processor import MedicalProcessor
+from src.services.pdf_parser import PdfPlumberParser
+from src.database.sql_repository import SqlDatabaseRepository
+from src.core.medical_orchestrator import MedicalRAGOrchestrator
+from src.database.connection import get_db
+from sqlalchemy.orm import Session
+from fastapi import APIRouter, HTTPException, File, UploadFile, Depends
+import hashlib
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv(), override=True)
+
 
 router = APIRouter(prefix="/v1/medical", tags=["Medical Reports"])
 

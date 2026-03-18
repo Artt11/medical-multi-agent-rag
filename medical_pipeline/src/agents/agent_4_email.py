@@ -2,12 +2,10 @@ from typing import Dict, Any, Optional, Tuple
 import re
 from pydantic import BaseModel, Field
 from src.core.config import llm
-from src.database.connection import get_db
+from src.database.connection import SessionLocal
 from src.database.models import PatientModel
 from src.services.email_service import send_smtp_email
 from sqlalchemy import func
-
-SessionLocal = next(get_db())
 
 
 class EmailSchema(BaseModel):
@@ -59,35 +57,108 @@ def _find_patient_email(
 # miayn es mna ste
 
 
+# def email_reminder_node(state: Dict[str, Any]) -> Dict[str, Any]:
+#     print("--- 📧 EMAIL REMINDER AGENT (Agent 4) ---")
+
+#     db = SessionLocal
+#     patient_id = state.get("patient_id")
+#     query = state.get("query", "")
+
+#     db_email = None
+#     patient_name = None
+#     if patient_id:
+#         db_email, _ = _find_patient_email(db, patient_id, None)
+
+#     structured_llm = llm.with_structured_output(EmailSchema)
+
+#     system_prompt = f"""
+#     You are a Medical Communication Assistant.
+#     Draft a clinical reminder based on the user request.
+
+#     CONTEXT:
+#     - Database Email: {db_email if db_email else "Not found in DB"}
+
+#     INSTRUCTIONS:
+#     - Priority 1: Use the Database Email.
+#     - Priority 2: If DB email is missing, extract from query.
+#     - If no email found at all, use 'NONE'.
+#     - Extract patient_name + DOB and patient_id  if present.
+#     """
+
+#     try:
+#         res = structured_llm.invoke([
+#             ("system", system_prompt),
+#             ("human", f"Request: {query}")
+#         ])
+
+#         patient_name = res.patient_name
+#         candidate_id = patient_id or res.patient_id
+
+#         db_email, db_error = _find_patient_email(
+#             db, candidate_id, patient_name)
+
+#         if db_error == "MULTIPLE_MATCHES":
+#             send_status = "Չուղարկվեց (մի քանի պացիենտ են համապատասխանում անունին)"
+#             final_answer = "Խնդրում ենք նշել ավելի կոնկրետ տվյալ (օր. ծննդյան տարեթիվ կամ ID):"
+#             return {
+#                 "final_answer": final_answer,
+#                 "email_status": send_status
+#             }
+
+#         recipient = db_email or (
+#             res.recipient if res.recipient != "NONE" else None)
+#         if not recipient:
+#             recipient = _extract_email(query)
+
+#         if recipient and "@" in recipient:
+#             send_status = send_smtp_email(recipient, res.subject, res.body)
+#         else:
+#             send_status = "Չուղարկվեց (Էլ. հասցեն բացակայում է)"
+
+#         final_answer = f"**Կարգավիճակ:** {send_status}\n\n**Նամակ:**\n{res.body}"
+
+#     except Exception as e:
+#         send_status = f"Error: {str(e)}"
+#         final_answer = "Տեղի է ունեցել սխալ նամակի մշակման ժամանակ:"
+#     finally:
+#         db.close()
+
+#     return {
+#         "final_answer": final_answer,
+#         "email_status": send_status
+#     }
 def email_reminder_node(state: Dict[str, Any]) -> Dict[str, Any]:
     print("--- 📧 EMAIL REMINDER AGENT (Agent 4) ---")
 
-    db = SessionLocal
+    # ՈՒՂՂՈՒՄ. Ավելացվել են () փակագծերը SessionLocal-ից հետո
+    db = SessionLocal()
+
     patient_id = state.get("patient_id")
     query = state.get("query", "")
 
     db_email = None
     patient_name = None
-    if patient_id:
-        db_email, _ = _find_patient_email(db, patient_id, None)
-
-    structured_llm = llm.with_structured_output(EmailSchema)
-
-    system_prompt = f"""
-    You are a Medical Communication Assistant.
-    Draft a clinical reminder based on the user request.
-    
-    CONTEXT:
-    - Database Email: {db_email if db_email else "Not found in DB"}
-    
-    INSTRUCTIONS:
-    - Priority 1: Use the Database Email.
-    - Priority 2: If DB email is missing, extract from query.
-    - If no email found at all, use 'NONE'.
-    - Extract patient_name + DOB and patient_id  if present.
-    """
 
     try:
+        if patient_id:
+            db_email, _ = _find_patient_email(db, patient_id, None)
+
+        structured_llm = llm.with_structured_output(EmailSchema)
+
+        system_prompt = f"""
+        You are a Medical Communication Assistant.
+        Draft a clinical reminder based on the user request.
+        
+        CONTEXT:
+        - Database Email: {db_email if db_email else "Not found in DB"}
+        
+        INSTRUCTIONS:
+        - Priority 1: Use the Database Email.
+        - Priority 2: If DB email is missing, extract from query.
+        - If no email found at all, use 'NONE'.
+        - Extract patient_name + DOB and patient_id if present.
+        """
+
         res = structured_llm.invoke([
             ("system", system_prompt),
             ("human", f"Request: {query}")
@@ -121,8 +192,9 @@ def email_reminder_node(state: Dict[str, Any]) -> Dict[str, Any]:
 
     except Exception as e:
         send_status = f"Error: {str(e)}"
-        final_answer = "Տեղի է ունեցել սխալ նամակի մշակման ժամանակ:"
+        final_answer = f"Տեղի է ունեցել սխալ նամակի մշակման ժամանակ: {str(e)}"
     finally:
+        # Հիմա db.close()-ը կաշխատի, որովհետև db-ն արդեն session է, ոչ թե sessionmaker
         db.close()
 
     return {

@@ -20,7 +20,7 @@ def _parse_connection_string(conn_str: str) -> dict:
 
 def build_pdf_url(
     doc_hash: str,
-    container_name: str = "reports-archive",
+    container_name: str = "raw-files",
     use_sas: bool = True
 ) -> Optional[str]:
     if not doc_hash:
@@ -61,7 +61,7 @@ def build_pdf_url(
 
 def build_pdf_urls(
     doc_hashes: Iterable[str],
-    container_name: str = "reports-archive",
+    container_name: str = "raw-files",
     use_sas: bool = True
 ) -> List[str]:
     urls: List[str] = []

@@ -5,7 +5,7 @@ from src.core.base_storage import IStorageService
 
 
 class AzureMedicalStorage(IStorageService):
-    def __init__(self, connection_string: str = None, container_name: str = "reports-archive"):
+    def __init__(self, connection_string: str = None, container_name: str = "raw-files"):
         conn_str = connection_string or os.getenv(
             "AZURE_STORAGE_CONNECTION_STRING")
         if not conn_str:

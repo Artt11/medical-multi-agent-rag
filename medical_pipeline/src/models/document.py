@@ -43,18 +43,41 @@ class PatientInfo(BaseModel):
         return None
 
 
+# class MedicalDocument(BaseModel):
+#     source: str
+#     ingested_at: datetime = Field(default_factory=datetime.now)
+#     patient: PatientInfo = Field(default_factory=PatientInfo)
+
+#     measurements: Dict[str, Any] = Field(default_factory=dict)
+#     diagnosis: List[str] = []
+#     conclusion: List[str] = []
+#     recommendations: List[str] = []
+
+#     all_data: str = Field(
+#         default="", description="PDF-ի ամբողջական, չմշակված տեքստը")
+#     chunks: List[MedicalChunk] = []
+#     raw_elements: List[Any] = []
+#     hash: Optional[str] = None
 class MedicalDocument(BaseModel):
     source: str
     ingested_at: datetime = Field(default_factory=datetime.now)
     patient: PatientInfo = Field(default_factory=PatientInfo)
 
     measurements: Dict[str, Any] = Field(default_factory=dict)
-    diagnosis: List[str] = []
-    conclusion: List[str] = []
-    recommendations: List[str] = []
+
+    diagnosis: List[Optional[str]] = Field(default_factory=list)
+    conclusion: List[Optional[str]] = Field(default_factory=list)
+    recommendations: List[Optional[str]] = Field(default_factory=list)
 
     all_data: str = Field(
         default="", description="PDF-ի ամբողջական, չմշակված տեքստը")
     chunks: List[MedicalChunk] = []
     raw_elements: List[Any] = []
     hash: Optional[str] = None
+
+    @field_validator('diagnosis', 'conclusion', 'recommendations', mode='before')
+    @classmethod
+    def filter_none_values(cls, v: Any) -> List[str]:
+        if not v or not isinstance(v, list):
+            return []
+        return [str(item) for item in v if item is not None]

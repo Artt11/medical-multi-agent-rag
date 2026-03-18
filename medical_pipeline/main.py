@@ -1,14 +1,14 @@
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 
 from src.services.api import router as medical_router
 from src.services.chat_api import router as chat_router
 
 from src.services.vector_service import AzureVectorService
 
-load_dotenv()
+load_dotenv(find_dotenv(), override=True)
 
 app = FastAPI(
     title="Medical Agentic RAG API",

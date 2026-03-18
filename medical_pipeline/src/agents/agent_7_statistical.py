@@ -1,80 +1,15 @@
-# from typing import Dict, Any
-# from sqlalchemy import text  # ԱՎԵԼԱՑՐԵԼ ԵՆՔ ՍԱ
-# from src.core.config import llm
-# from src.database.connection import SessionLocal
-
-
-# def statistical_filter_node(state: Dict[str, Any]) -> Dict[str, Any]:
-#     print("--- 📊 STATISTICAL FILTER AGENT (Agent 7) ---")
-
-#     db = SessionLocal()
-
-#     # 1. LLM-ը գեներացնում է SQL-ը
-#     system_prompt = (
-#         "You are a Healthcare Data Scientist. Translate the user query into a read-only T-SQL query.\n"
-#         "Tables:\n"
-#         "- patients: id, name, dob, gender, social_card\n"
-#         "- medical_exams: exam_id, patient_id, exam_date, diagnosis, conclusion\n"
-#         "Return ONLY the SQL code."
-#     )
-
-#     sql_response = llm.invoke([
-#         ("system", system_prompt),
-#         ("human", state["query"])
-#     ])
-
-#     generated_sql = sql_response.content.replace(
-#         "```sql", "").replace("```", "").strip()
-#     print(f"Գեներացված SQL: {generated_sql}")
-
-#     # 2. ԻՐԱԿԱՆ ԿԱՏԱՐՈՒՄ ԵՎ ՍԽԱԼՆԵՐԻ ՈՐՍՈՒՄ (Self-Correction Logic)
-#     db_results = []
-#     error_msg = None
-
-#     try:
-#         # Աշխատեցնում ենք SQL-ը բազայի վրա
-#         result_proxy = db.execute(text(generated_sql))
-#         # Վերցնում ենք արդյունքները և դարձնում Dictionary
-#         db_results = [dict(row._mapping) for row in result_proxy.fetchall()]
-#     except Exception as e:
-#         error_msg = str(e)
-#         print(f"SQL Սխալ: {error_msg}")
-#     finally:
-#         db.close()
-
-#     # 3. Վերջնական պատասխանի ձևավորում ՌԵԱԼ տվյալներով
-#     if error_msg:
-#         explanation_prompt = (
-#             f"You are a Healthcare Analyst. You tried to run this SQL: {generated_sql}\n"
-#             f"But database returned an error: {error_msg}\n"
-#             "Apologize to the user and explain that the statistical query could not be completed due to a data schema mismatch."
-#         )
-#     else:
-#         explanation_prompt = (
-#             f"You are a Data Analyst. Explain these real database results to the user based on their query: '{state['query']}'.\n"
-#             f"Real Data found: {db_results}\n"
-#             "Provide a professional, clinical summary of these numbers. Do not show the raw JSON/Dict, write a nice human text."
-#         )
-
-#     final_response = llm.invoke([("system", explanation_prompt)])
-
-#     return {
-#         "final_answer": final_response.content,
-#         "sql_results": db_results  # Հիմա սա իսկական ռեալ տվյալների զանգված է
-#     }
 from typing import Dict, Any
 import json
 from sqlalchemy import text
 from src.core.config import llm
-from src.database.connection import get_db
+from src.database.connection import SessionLocal
 from src.services.source_link_service import build_pdf_urls, format_source_links
-SessionLocal = next(get_db())
 
 
 def statistical_filter_node(state: Dict[str, Any]) -> Dict[str, Any]:
     print("--- 📊 STATISTICAL FILTER AGENT (Agent 7) ---")
 
-    db = SessionLocal
+    db = SessionLocal()
 
     # 1. LLM generates SQL
     system_prompt = """
@@ -202,7 +137,6 @@ No markdown.
     finally:
         db.close()
 
-    # 3. Final explanation using real data
     if error_msg:
         explanation_prompt = f"""
 ROLE
