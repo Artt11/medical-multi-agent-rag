@@ -26,7 +26,7 @@ export function Sidebar({
         </div>
         <div>
           <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Chat UI</p>
-          <p className="text-lg font-semibold">Nimbus</p>
+          <p className="text-lg font-semibold">Medical</p>
         </div>
       </div>
 

@@ -6,7 +6,7 @@ from src.database.connection import SessionLocal
 
 
 def disease_cohort_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    print("--- 🦠 DISEASE COHORT AGENT (Agent 2) ---")
+    print("---DISEASE COHORT AGENT (Agent 2) ---")
 
     db = SessionLocal()
     disease_target = state.get("disease") or "the specified condition"

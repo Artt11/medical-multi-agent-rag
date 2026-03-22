@@ -7,11 +7,10 @@ from src.services.source_link_service import build_pdf_urls, format_source_links
 
 
 def statistical_filter_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    print("--- 📊 STATISTICAL FILTER AGENT (Agent 7) ---")
+    print("---STATISTICAL FILTER AGENT (Agent 7) ---")
 
     db = SessionLocal()
 
-    # 1. LLM generates SQL
     system_prompt = """
 ROLE
 You are a Clinical Data Science SQL Agent.

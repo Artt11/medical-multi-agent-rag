@@ -68,5 +68,4 @@ for agent in [
 ]:
     workflow.add_edge(agent, END)
 
-# app = workflow.compile()
 app = workflow.compile(checkpointer=memory)

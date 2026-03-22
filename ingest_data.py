@@ -21,15 +21,15 @@ try:
     from medical_pipeline.src.services.vector_service import AzureVectorService
     from medical_pipeline.src.services.hash_service import BinaryHashService
 
-    print("✅ Բոլոր մոդուլները հաջողությամբ բեռնվեցին:")
+    print("Բոլոր մոդուլները հաջողությամբ բեռնվեցին:")
 except ImportError as e:
-    print(f"❌ Import-ի սխալ: {e}")
+    print(f" Import-ի սխալ: {e}")
     print(f"Փորձում էի փնտրել այստեղ: {pipeline_path}")
     sys.exit(1)
 
 
 async def ingest_medical_documents():
-    print("\n🚀 Սկսում ենք PDF-ների ավտոմատ մշակումը...\n")
+    print("\n Սկսում ենք PDF-ների ավտոմատ մշակումը...\n")
 
     storage_service = AzureMedicalStorage()
     vector_service = AzureVectorService()
@@ -56,15 +56,15 @@ async def ingest_medical_documents():
         pdf_folder = os.path.join(current_dir, "data_pdf")
 
     if not os.path.exists(pdf_folder):
-        print(f"❌ Չեմ գտնում PDF-ների թղթապանակը ({pdf_folder})")
+        print(f"Չեմ գտնում PDF-ների թղթապանակը ({pdf_folder})")
         return
 
     pdf_files = [f for f in os.listdir(pdf_folder) if f.endswith('.pdf')]
-    print(f"📁 Գտնվել է {len(pdf_files)} ֆայլ '{pdf_folder}' թղթապանակում\n")
+    print(f"Գտնվել է {len(pdf_files)} ֆայլ '{pdf_folder}' թղթապանակում\n")
 
     for file_name in pdf_files:
         file_path = os.path.join(pdf_folder, file_name)
-        print(f"⏳ Մշակվում է: {file_name}...")
+        print(f"Մշակվում է: {file_name}...")
 
         try:
             with open(file_path, "rb") as f:
@@ -79,13 +79,13 @@ async def ingest_medical_documents():
             )
 
             print(
-                f"  ✅ Հաջողությամբ պահվեց: {doc.patient.name} (Chunks: {len(doc.chunks)})")
+                f"Հաջողությամբ պահվեց: {doc.patient.name} (Chunks: {len(doc.chunks)})")
 
         except Exception as e:
-            print(f"  ❌ ՍԽԱԼ '{file_name}': {e}")
+            print(f"ՍԽԱԼ '{file_name}': {e}")
 
     db.close()
-    print("\n🎉 Ավարտված է: Այժմ կարող ես հարցեր տալ չաթին:")
+    print("\nԱվարտված է: Այժմ կարող ես հարցեր տալ չաթին:")
 
 if __name__ == "__main__":
     asyncio.run(ingest_medical_documents())

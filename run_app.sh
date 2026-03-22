@@ -8,7 +8,7 @@ cd "$ROOT_DIR/medical_pipeline"
 python main.py &
 BACKEND_PID=$!
 
-cd "$ROOT_DIR/chatgpt-clone"
+cd "$ROOT_DIR/frontend"
 npm run dev &
 FRONTEND_PID=$!
 

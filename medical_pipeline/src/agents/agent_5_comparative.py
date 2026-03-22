@@ -7,7 +7,7 @@ from src.services.source_link_service import build_pdf_urls, format_source_links
 
 
 def comparative_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    print("--- ⚖️ COMPARATIVE ANALYST AGENT (Agent 5) ---")
+    print("---COMPARATIVE ANALYST AGENT (Agent 5) ---")
 
     retriever = HybridMedicalRetriever()
 

@@ -4,7 +4,7 @@ from src.core.schemas import RouteDecision
 
 
 def orchestrator_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    print("--- 🧠 ORCHESTRATOR AGENT ---")
+    print("---ORCHESTRATOR AGENT ---")
 
     structured_llm = llm.with_structured_output(RouteDecision)
 
@@ -74,7 +74,7 @@ If a value is not present, return null.
 
 ROUTING HINTS
 
-PCR test is for COVID diagnosis.
+PCR test is for COVID .
 
 If the user asks to find patients by name or by birth year/DOB,
 route to statistical_filter_agent.

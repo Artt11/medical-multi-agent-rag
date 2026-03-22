@@ -55,7 +55,6 @@ class MedicalProcessor(IProcessor):
 
         if self._hasher:
             doc.hash = self._hasher.hash_bytes(full_text.encode("utf-8"))
-            # doc.hash = hashlib.sha256(full_text.encode("utf-8")).hexdigest()
         return doc
 
     def _extract_via_llm(self, json_data_str: str) -> dict:

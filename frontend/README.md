@@ -3,7 +3,7 @@
 A production-ready ChatGPT-style web app built with Next.js (App Router), TypeScript, TailwindCSS, and shadcn UI components. It includes a streaming chat API, conversation switching, markdown rendering, and a polished sidebar + chat layout.
 
 ## Features
-- ChatGPT-style UI with sidebar + chat area
+- UI with sidebar + chat area
 - Streaming responses (when the provider supports SSE)
 - Markdown rendering + code block highlighting
 - Copy-to-clipboard for code blocks

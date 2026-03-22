@@ -84,4 +84,4 @@ class AzureVectorService:
         search_client = SearchClient(
             self.endpoint, self.index_name, self.credential)
         search_client.upload_documents(documents)
-        print(f"✅ {len(documents)} փաստաթուղթ վերբեռնվեց:")
+        print(f"{len(documents)} փաստաթուղթ վերբեռնվեց:")

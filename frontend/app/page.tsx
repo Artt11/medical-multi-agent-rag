@@ -121,11 +121,11 @@ export default function Home() {
       prev.map((item) =>
         item.id === conversation.id
           ? {
-              ...item,
-              title: updatedTitle,
-              messages: [...item.messages, userMessage, assistantMessage],
-              updatedAt: Date.now()
-            }
+            ...item,
+            title: updatedTitle,
+            messages: [...item.messages, userMessage, assistantMessage],
+            updatedAt: Date.now()
+          }
           : item
       )
     );
@@ -150,9 +150,9 @@ export default function Home() {
           messages: item.messages.map((message) =>
             message.id === assistantMessage.id
               ? {
-                  ...message,
-                  content: `Error: ${errorText || response.statusText}`
-                }
+                ...message,
+                content: `Error: ${errorText || response.statusText}`
+              }
               : message
           )
         }));
@@ -221,25 +221,25 @@ export default function Home() {
   const emptyState = (
     <div className="rounded-3xl border border-slate-200 bg-white/80 p-8 shadow-soft">
       <p className="text-xs font-semibold uppercase tracking-[0.4em] text-slate-400">
-        Nimbus Assistant
+        Medical Assistant
       </p>
       <h1 className="mt-4 text-3xl font-semibold text-slate-900">
-        Build clarity, one prompt at a time.
+        Your AI Bridge to Medical Clarity.
       </h1>
       <p className="mt-3 text-sm text-slate-500">
-        Ask for code help, strategy, or simply start a new conversation.
+        Ask for code help , or simply start a new conversation.
       </p>
       <div className="mt-6 grid gap-3 sm:grid-cols-2">
         {[
-          "Draft a product brief for a mobile analytics tool.",
-          "Summarize a PRD and call out missing requirements.",
-          "Generate a React component checklist.",
-          "Explain a complex bug in plain English."
+          "Which patients have a diagnosis of pneumonia.",
+          "How many patients are currently registered in the database.",
+          "Can you find the MRI report for Barsegyan S.L.",
         ].map((example) => (
           <Button
             key={example}
             variant="outline"
-            className="justify-start text-left"
+            // Ավելացրու h-auto, whitespace-normal և break-words
+            className="h-auto whitespace-normal break-words py-3 justify-start text-left"
             onClick={() => sendMessage(example)}
             disabled={isStreaming}
           >

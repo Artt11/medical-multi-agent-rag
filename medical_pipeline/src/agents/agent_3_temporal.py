@@ -7,7 +7,7 @@ from src.services.source_link_service import build_pdf_urls, format_source_links
 
 
 def temporal_disease_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    print("--- ⏳ TEMPORAL DISEASE AGENT (Agent 3) ---")
+    print("---TEMPORAL DISEASE AGENT (Agent 3) ---")
 
     patient_id = state.get("patient_id")
     original_query = state.get("query")

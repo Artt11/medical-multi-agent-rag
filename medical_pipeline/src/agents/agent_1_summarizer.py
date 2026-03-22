@@ -6,7 +6,7 @@ from src.services.source_link_service import build_pdf_urls, format_source_links
 
 
 def summarizer_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    print("--- 📄 SUMMARIZER AGENT (Agent 1) ---")
+    print("---SUMMARIZER AGENT (Agent 1) ---")
 
     retriever = HybridMedicalRetriever()
 
