@@ -21,8 +21,8 @@ class MedicalExamModel(Base):
 
     exam_id = Column(Integer, primary_key=True, index=True)
     patient_id = Column(Integer, ForeignKey("patients.id"))
-
     source_file = Column(String(255))
+    source_url = Column(String)
     exam_date = Column(Date)
     examination_type = Column(String(255))
     referring_physician = Column(String(255))

@@ -14,4 +14,4 @@ __pycache__
 .env.local
 .env.local.example
 # OS
-.DS_Store
+.DS_Storegdrive_credentials.json

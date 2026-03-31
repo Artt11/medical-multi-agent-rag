@@ -1,6 +1,8 @@
+import os
 from src.services.hash_service import BinaryHashService
 from src.services.vector_service import AzureVectorService
-from src.services.azure_storage_service import AzureMedicalStorage
+# from src.services.azure_storage_service import AzureMedicalStorage
+from src.services.google_drive_service import GoogleDriveService
 from src.services.chunking_service import ChunkingService
 from src.services.data_processor import MedicalProcessor
 from src.services.pdf_parser import PdfPlumberParser
@@ -13,10 +15,13 @@ import hashlib
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv(), override=True)
 
-
 router = APIRouter(prefix="/v1/medical", tags=["Medical Reports"])
 
-storage_service = AzureMedicalStorage()
+FOLDER_ID = os.getenv("GDRIVE_FOLDER_ID")
+CREDENTIALS_PATH = os.getenv("GDRIVE_CREDENTIALS_PATH")
+
+storage_service = GoogleDriveService(CREDENTIALS_PATH, FOLDER_ID)
+# storage_service = AzureMedicalStorage()
 vector_service = AzureVectorService()
 parser = PdfPlumberParser()
 hasher = BinaryHashService()

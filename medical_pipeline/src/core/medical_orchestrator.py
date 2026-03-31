@@ -24,32 +24,25 @@ class MedicalRAGOrchestrator:
         self.vector_service = vector_service
         self.repository = repository
 
-    async def handle_report_upload(self, file_name: str, pdf_bytes: bytes, doc_hash: str):
+    async def process_drive_file(self, file_id: str, file_name: str, drive_url: str, doc_hash: str):
+        pdf_bytes = self.storage.download_file_bytes(file_id)
         elements = self.parser.parse(pdf_bytes)
-
         doc: MedicalDocument = self.processor.process(file_name, elements)
         doc.hash = doc_hash
-
         doc.chunks = self.chunker.create_chunks(doc)
 
-        self.repository.save(doc)
-
-        pdf_url = self.storage.upload_medical_pair(
-            file_hash=doc_hash,
-            pdf_bytes=pdf_bytes,
-            doc_data=doc.model_dump(mode='json')
-        )
+        self.repository.save(document=doc, source_url=drive_url)
 
         if doc.chunks:
             for chunk in doc.chunks:
                 chunk.metadata.update({
                     "doc_hash": doc_hash,
-                    "blob_url": pdf_url,
+                    "blob_url": drive_url,
                     "patient_db_id": str(doc.patient.patient_id or "unknown")
                 })
-
             self.vector_service.index_chunks(doc.chunks)
         else:
-            print("Warning: No chunks generated. Skipping indexing.")
+            print(
+                f"Warning: No chunks generated for {file_name}. Skipping indexing.")
 
-        return doc, pdf_url
+        return doc, drive_url
