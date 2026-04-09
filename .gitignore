@@ -15,3 +15,8 @@ __pycache__
 .env.local.example
 # OS
 .DS_Storegdrive_credentials.json
+
+
+gdrive_credentials.json
+.DS_Store
+medical_pipeline/output_json/

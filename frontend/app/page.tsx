@@ -19,7 +19,7 @@ const createId = () =>
 
 const createConversation = (): Conversation => ({
   id: createId(),
-  title: "New Chat",
+  title: "Նոր զրույց",
   messages: [],
   createdAt: Date.now(),
   updatedAt: Date.now()
@@ -115,7 +115,7 @@ export default function Home() {
     };
 
     const updatedTitle =
-      conversation.title === "New Chat" ? buildTitle(text) : conversation.title;
+      conversation.title === "Նոր զրույց" ? buildTitle(text) : conversation.title;
 
     setConversations((prev) =>
       prev.map((item) =>
@@ -219,21 +219,21 @@ export default function Home() {
   };
 
   const emptyState = (
-    <div className="rounded-3xl border border-slate-200 bg-white/80 p-8 shadow-soft">
+    <div className="rounded-3xl border border-slate-200 bg-white/80 p-8 shadow-sm text-center">
       <p className="text-xs font-semibold uppercase tracking-[0.4em] text-slate-400">
-        Medical Assistant
+
       </p>
       <h1 className="mt-4 text-3xl font-semibold text-slate-900">
-        Your AI Bridge to Medical Clarity.
+        Ձեր AI ՕԳՆԱԿԱՆԸ
       </h1>
       <p className="mt-3 text-sm text-slate-500">
-        Ask for code help , or simply start a new conversation.
+        Հարցրեք բժշկական թեմաներով կամ պարզապես սկսեք նոր զրույց
       </p>
-      <div className="mt-6 grid gap-3 sm:grid-cols-2">
+      <div className="mt-8 grid gap-3 sm:grid-cols-2 text-left">
         {[
-          "Which patients have a diagnosis of pneumonia.",
-          "How many patients are currently registered in the database.",
-          "Can you find the MRI report for Barsegyan S.L.",
+          "Ո՞ր պացիենտներն ունեն թոքաբորբի ախտորոշում",
+          "Քանի՞ պացիենտ է գրանցված  բազայում",
+          "Կարո՞ղ ես գտնել Բարսեղյան Ս.Լ.-ի ՄՌՏ հետազոտությունը",
         ].map((example) => (
           <Button
             key={example}

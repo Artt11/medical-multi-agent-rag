@@ -1,127 +1,3 @@
-# from typing import Dict, Any
-# from src.core.config import llm
-# from src.core.schemas import MedicalSearchQuery
-# from src.services.medical_retriever import HybridMedicalRetriever
-# from src.services.source_link_service import build_pdf_urls, format_source_links
-
-
-# def summarizer_node(state: Dict[str, Any]) -> Dict[str, Any]:
-#     print("---SUMMARIZER AGENT (Agent 1) ---")
-
-#     retriever = HybridMedicalRetriever()
-
-#     search_params = MedicalSearchQuery(
-#         query_text=state["query"],
-#         patient_id=state.get("patient_id", ""),
-#         top_k=5
-#     )
-#     chunks = retriever.search(search_params)
-#     context = "\n\n".join([c.page_content for c in chunks])
-#     system_prompt = (
-#         """ROLE
-# You are a ** Clinical Report Summarization Agent ** operating inside a Retrieval-Augmented Generation(RAG) system.
-
-# Your responsibility is to generate a ** clear, accurate, and concise clinical summary ** of a patient's medical examination report using **only the retrieved context**.
-
-# ---
-
-# INPUT
-# You will receive:
-
-# Context:
-# Medical text retrieved from a knowledge base, which may include:
-
-# * physician notes
-# * laboratory results
-# * diagnostic reports
-# * OCR-extracted medical documents
-
-# The context may contain **noise, partial sentences, or formatting errors**.
-
-# ---
-
-# OBJECTIVE
-
-# Extract and summarize the most clinically relevant information from the context, including:
-
-# • Primary diagnosis (if present)
-# • Critical abnormal laboratory values
-# • Key clinical observations
-# • Physician’s conclusion or impression
-
-# The summary must be **clinically precise and easy for medical professionals to read**.
-
-# ---
-
-# STRICT RULES
-
-# 1. **Grounding Requirement**
-#    Every statement in the summary must come directly from the provided context.
-
-# 2. **Zero Hallucination Policy**
-#    Do not invent diagnoses, values, symptoms, treatments, or conclusions.
-
-# 3. **No External Knowledge**
-#    Do not use prior knowledge or assumptions. Use only the retrieved text.
-
-# 4. **Incomplete Context Handling**
-#    If the context is empty or lacks enough medical information, respond exactly with:
-
-# Insufficient medical records available to provide a summary.
-
-# 5. **Clinical Terminology**
-#    Use professional medical terminology appropriate for physicians.
-
-# 6. **Prioritize Important Findings**
-#    Highlight abnormal laboratory results, confirmed diagnoses, and physician conclusions.
-
-# ---
-
-# OUTPUT FORMAT
-
-# Clinical Summary
-
-# Primary Diagnosis:
-# <diagnosis or "Not specified">
-
-# Key Abnormal Findings:
-# • <finding>
-# • <finding>
-
-# Physician Conclusion / Impression:
-
-# <summary or "Not specified">
-
-# Additional Notes:
-# <optional clinically relevant information or "None">
-
-# ---
-
-# QUALITY STANDARD
-
-# The output must be:
-
-# • Factually grounded in the context
-# • Clinically accurate
-# • Concise and structured
-# • Free of speculation"""
-#     )
-
-#     human_message = f"Medical Context:\n{context}\n\nUser Query: {state['query']}"
-
-#     response = llm.invoke([
-#         ("system", system_prompt),
-#         ("human", human_message)
-#     ])
-
-#     blob_urls = [c.blob_url for c in chunks if c.blob_url]
-#     doc_hashes = [c.document_hash for c in chunks if c.document_hash]
-#     source_block = format_source_links(blob_urls + build_pdf_urls(doc_hashes))
-
-#     return {
-#         "final_answer": response.content + source_block,
-#         "context_chunks": [context]
-#     }
 from typing import Dict, Any
 from sqlalchemy.orm import Session
 from src.core.config import llm
@@ -132,27 +8,23 @@ from src.database.models import PatientModel, MedicalExamModel
 
 
 def summarizer_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    print("--- 🤖 SUMMARIZER AGENT (Agent 1 - SQL First) ---")
+    print("--- 🤖 SUMMARIZER AGENT (Optimized for JSON & RAG) ---")
 
     patient_id = state.get("patient_id", "")
     query_text = state["query"]
     context = ""
     source_urls = set()
 
-    # ==========================================
-    # 1. SQL-FIRST LOGIC (ՆՈՐ ԱՐԱԳ ՄՈՏԵՑՈՒՄ)
-    # ==========================================
+    # 1. SQL-FIRST LOGIC
     if patient_id:
         db: Session = SessionLocal()
         try:
-            # Փնտրում ենք պացիենտին բազայում
             patient = db.query(PatientModel).filter(
                 (PatientModel.patient_id == patient_id) |
                 (PatientModel.social_card == patient_id)
             ).first()
 
             if patient:
-                # Վերցնում ենք վերջին 3 հետազոտությունների ԱՄԲՈՂՋԱԿԱՆ JSON-ները
                 recent_exams = db.query(MedicalExamModel).filter(
                     MedicalExamModel.patient_id == patient.id
                 ).order_by(MedicalExamModel.exam_date.desc()).limit(3).all()
@@ -161,147 +33,84 @@ def summarizer_node(state: Dict[str, Any]) -> Dict[str, Any]:
                     json_contexts = []
                     for exam in recent_exams:
                         if exam.full_json:
-                            # Որպես կոնտեքստ տալիս ենք մաքուր JSON-ը
+                            # Օգտագործում ենք XML-ատիպ տեգեր կոնտեքստը LLM-ի համար ավելի ընկալելի դարձնելու համար
                             json_contexts.append(
-                                f"Date: {exam.exam_date} | Type: {exam.examination_type}\nData: {exam.full_json}")
+                                f"<record>\n<date>{exam.exam_date}</date>\n<type>{exam.examination_type}</type>\n<raw_data>{exam.full_json}</raw_data>\n</record>")
                         if exam.source_url:
                             source_urls.add(exam.source_url)
 
                     if json_contexts:
-                        context = "\n\n---\n\n".join(json_contexts)
-                        print(
-                            "--- ⚡ LOG: Կոնտեքստը վերցվեց SQL բազայի մաքուր JSON-ից ---")
+                        context = "\n".join(json_contexts)
+                        print("--- ⚡ LOG: SQL JSON Context Loaded ---")
         except Exception as e:
-            print(f"--- ⚠️ LOG: SQL սխալ, անցնում ենք RAG-ի: {e} ---")
+            print(f"--- ⚠️ LOG: SQL Error: {e} ---")
         finally:
             db.close()
 
-    # ==========================================
-    # 2. FALLBACK TO VECTOR SEARCH (ՀԻՆ RAG ՄՈՏԵՑՈՒՄԸ)
-    # ==========================================
+    # 2. FALLBACK TO VECTOR SEARCH
     if not context:
-        print("--- 🔍 LOG: Անցնում ենք Vector Search-ի (Hybrid Retrieval) ---")
+        print("--- 🔍 LOG: Falling back to Vector Search ---")
         retriever = HybridMedicalRetriever()
-
         search_params = MedicalSearchQuery(
-            query_text=query_text,
-            patient_id=patient_id,
-            top_k=5
-        )
+            query_text=query_text, patient_id=patient_id, top_k=5)
         chunks = retriever.search(search_params)
-        context = "\n\n".join([c.page_content for c in chunks])
-
+        context = "\n\n".join(
+            [f"<chunk>{c.page_content}</chunk>" for c in chunks])
         for c in chunks:
-            # Եթե մեր նոր համակարգը chunk-ի մեջ դրել է blob_url (որն արդեն Drive-ի url-ն է)
             if c.blob_url:
                 source_urls.add(c.blob_url)
 
-    # ==========================================
-    # 3. LLM PROMPT (ՔՈ ԳՐԱԾ ՊՐՈՄՓԹԸ ԱՆՓՈՓՈԽ)
-    # ==========================================
+    # 3. IMPROVED LLM PROMPT
+    # Ավելացրել եմ Chain-of-Thought (հրահանգ՝ նախ վերլուծել, հետո գրել) և JSON մշակման կանոններ
     system_prompt = (
-        """ROLE
-You are a ** Clinical Report Summarization Agent ** operating inside a Retrieval-Augmented Generation(RAG) system.
+        """ROLE:
+You are an expert Senior Clinical Informatics Specialist. Your task is to analyze medical data and provide a precise clinical summary.
 
-Your responsibility is to generate a ** clear, accurate, and concise clinical summary ** of a patient's medical examination report using **only the retrieved context**.
+DATA HANDLING:
+The provided context may contain raw JSON structures or OCR-extracted text. 
+- If JSON: Map keys to clinical meanings (e.g., "val" -> value, "ref" -> reference range).
+- If OCR: Ignore formatting errors and focus on medical entities.
 
----
+INSTRUCTIONS:
+1. **Analyze**: Carefully scan the data for diagnoses, abnormal lab values (flagged as 'high', 'low', '*', or outside reference ranges), and doctor recommendations.
+2. **Synthesize**: Create a summary that reflects the patient's current health status based ONLY on the provided records.
+3. **Verify**: Ensure all measurements include their respective units (e.g., mg/dL, mmol/L).
 
-INPUT
-You will receive:
+STRICT RULES:
+- **Grounding**: Do not include information NOT found in the context.
+- **No Hallucinations**: If a value is missing, state "Not specified". 
+- **Language**: If the User Query is in Armenian, provide the summary in Armenian. If in English, provide it in English.
+- **Empty State**: If context is insufficient, return: "Insufficient medical records available to provide a summary."
 
-Context:
-Medical text retrieved from a knowledge base, which may include:
+OUTPUT STRUCTURE:
+## Clinical Summary
 
-* physician notes
-* laboratory results
-* diagnostic reports
-* OCR-extracted medical documents
-
-The context may contain **noise, partial sentences, or formatting errors**.
-
----
-
-OBJECTIVE
-
-Extract and summarize the most clinically relevant information from the context, including:
-
-• Primary diagnosis (if present)
-• Critical abnormal laboratory values
-• Key clinical observations
-• Physician’s conclusion or impression
-
-The summary must be **clinically precise and easy for medical professionals to read**.
-
----
-
-STRICT RULES
-
-1. **Grounding Requirement**
-   Every statement in the summary must come directly from the provided context.
-
-2. **Zero Hallucination Policy**
-   Do not invent diagnoses, values, symptoms, treatments, or conclusions.
-
-3. **No External Knowledge**
-   Do not use prior knowledge or assumptions. Use only the retrieved text.
-
-4. **Incomplete Context Handling**
-   If the context is empty or lacks enough medical information, respond exactly with:
-
-Insufficient medical records available to provide a summary.
-
-5. **Clinical Terminology**
-   Use professional medical terminology appropriate for physicians.
-
-6. **Prioritize Important Findings**
-   Highlight abnormal laboratory results, confirmed diagnoses, and physician conclusions.
-
----
-
-OUTPUT FORMAT
-
-Clinical Summary
-
-Primary Diagnosis:
+**Primary Diagnosis:** 
 <diagnosis or "Not specified">
 
-Key Abnormal Findings:
-• <finding>
-• <finding>
+**Key Abnormal Findings:**
+- <finding 1 with values/units>
+- <finding 2 with values/units>
 
-Physician Conclusion / Impression:
+**Physician Conclusion & Impression:**
+<concise summary of doctor's final words>
 
-<summary or "Not specified">
-
-Additional Notes:
-<optional clinically relevant information or "None">
-
----
-
-QUALITY STANDARD
-
-The output must be:
-
-• Factually grounded in the context
-• Clinically accurate
-• Concise and structured
-• Free of speculation"""
+**Additional Clinical Notes:**
+<relevant details like follow-up dates or specific warnings or "None">"""
     )
 
-    human_message = f"Medical Context:\n{context}\n\nUser Query: {query_text}"
+    human_message = f"USER QUERY: {query_text}\n\n<medical_context>\n{context}\n</medical_context>"
 
     response = llm.invoke([
         ("system", system_prompt),
         ("human", human_message)
     ])
 
-    # 4. Սարքում ենք Google Drive հղումների բլոկը
+    # 4. Source Block Formatting
+    source_block = ""
     if source_urls:
-        source_block = "\n\n🔗 **Source Documents (Google Drive):**\n" + "\n".join(
-            [f"- [Դիտել Ֆայլը]({url})" for url in source_urls])
-    else:
-        source_block = ""
+        source_block = "\n\n🔗 **Կից փաստաթղթեր / Source Documents:**\n" + "\n".join(
+            [f"- [Դիտել ֆայլը]({url})" for url in source_urls])
 
     return {
         "final_answer": response.content + source_block,

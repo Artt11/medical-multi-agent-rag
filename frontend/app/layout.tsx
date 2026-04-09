@@ -1,22 +1,15 @@
 import "./globals.css";
-import { IBM_Plex_Sans, Sora } from "next/font/google";
+import { Inter } from "next/font/google";
 
-const sora = Sora({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-sora",
-  display: "swap"
-});
-
-const plex = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-plex",
+  variable: "--font-inter",
   display: "swap"
 });
 
 export const metadata = {
-  title: "Nimbus Chat",
-  description: "A ChatGPT-style interface with real LLM streaming."
+  title: "Nimbus Medical Chat",
+  description: "A professional medical-grade interface."
 };
 
 export default function RootLayout({
@@ -25,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${sora.variable} ${plex.variable}`}>
-      <body className="min-h-screen bg-slate-50 text-slate-900 antialiased">
+    <html lang="en" className={inter.variable}>
+      <body className="font-sans min-h-screen bg-slate-50 text-slate-900 antialiased">
         {children}
       </body>
     </html>

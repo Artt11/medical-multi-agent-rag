@@ -1,117 +1,47 @@
+
 # from typing import Dict, Any
 # import json
 # from sqlalchemy import text
 # from src.core.config import llm
 # from src.database.connection import SessionLocal
-# from src.services.source_link_service import build_pdf_urls, format_source_links
+# # ՀԵՌԱՑՎԵԼ Է: source_link_service-ի ներմուծումը
 
 
 # def statistical_filter_node(state: Dict[str, Any]) -> Dict[str, Any]:
-#     print("---STATISTICAL FILTER AGENT (Agent 7) ---")
+#     print("--- 📊 STATISTICAL FILTER AGENT (Agent 7 - SQL Direct) ---")
 
 #     db = SessionLocal()
 
 #     system_prompt = """
 # ROLE
 # You are a Clinical Data Science SQL Agent.
-
-# Your task is to convert the user's statistical medical query into a precise,
-# read-only T-SQL query.
+# Your task is to convert the user's statistical medical query into a precise T-SQL query.
 
 # --------------------------------------------------
-
 # DATABASE SCHEMA
 
 # Table: patients
-# Columns:
-# - id
-# - name
-# - dob
-# - gender
-# - social_card
+# Columns: [id, name, dob, gender, social_card]
 
 # Table: medical_exams
 # Columns:
-# - exam_id
-# - patient_id
-# - exam_date
-# - diagnosis
-# - conclusion
-# - recommendations
-# - examination_type
+# - exam_id, patient_id, exam_date, examination_type
+# - diagnosis, conclusion, recommendations
 # - document_hash
+# - source_url      <-- ԱՎԵԼԱՑՎԱԾ Է (Google Drive URL)
 
-# Relationship:
-# patients.id = medical_exams.patient_id
-
+# Relationship: patients.id = medical_exams.patient_id
 # --------------------------------------------------
 
 # TASK
+# Generate a SQL query to retrieve patient cohorts or medical exam data.
 
-# Generate a SQL query that retrieves patient cohorts or medical exam data
-# based on statistical filters requested by the user.
+# IMPORTANT:
+# If the user asks for a specific patient's medical analysis or results,
+# ALWAYS include 'medical_exams.source_url' in your SELECT statement
+# so we can provide the original document link.
 
-# These may include:
-
-# • age filtering (derived from dob)
-# • name-based patient lookup
-# • birth year filtering (e.g., "born in 2000")
-# • diagnosis-based filtering
-# • examination date ranges
-# • cohort counting or grouping
-# • patient analysis or results by name
-
-# --------------------------------------------------
-
-# SECURITY RULES
-
-# 1. READ-ONLY DATABASE ACCESS
-# Only generate SELECT queries.
-
-# Never generate:
-# INSERT
-# UPDATE
-# DELETE
-# DROP
-# ALTER
-# TRUNCATE
-
-# 2. SCHEMA CONSTRAINT
-# Use ONLY the tables and columns defined above.
-
-# 3. JOIN RULE
-# If both patient and exam data are needed, join tables using:
-
-# patients.id = medical_exams.patient_id
-
-# 4. DIAGNOSIS MATCHING
-# When filtering diagnoses, use flexible matching:
-
-# LOWER(medical_exams.diagnosis) LIKE '%keyword%'
-
-# 5. NAME MATCHING
-# When filtering by patient name, use flexible matching:
-
-# LOWER(patients.name) LIKE '%name%'
-
-# 6. BIRTH YEAR FILTERING
-# When filtering by birth year, use:
-
-# YEAR(patients.dob) = <year>
-
-# 7. PATIENT ANALYSIS QUERIES
-# If the user asks for a specific patient's medical analysis or results by name,
-# select patient identity plus exam details. Include at least:
-
-# patients.name, patients.dob, patients.gender,
-# medical_exams.exam_date, medical_exams.examination_type,
-# medical_exams.diagnosis, medical_exams.conclusion, medical_exams.recommendations,
-# medical_exams.document_hash
-
-# 8. OUTPUT FORMAT
-# Return ONLY the SQL query.
-# No explanations.
-# No markdown.
+# SECURITY: Return ONLY the SQL query. No markdown.
 # """
 
 #     sql_response = llm.invoke([
@@ -121,7 +51,6 @@
 
 #     generated_sql = sql_response.content.replace(
 #         "```sql", "").replace("```", "").strip()
-
 #     print(f"Generated SQL: {generated_sql}")
 
 #     db_results = []
@@ -136,228 +65,102 @@
 #     finally:
 #         db.close()
 
+#     # Արդյունքների բացատրության լոգիկան (Նույնն է մնում, ինչ քո կոդում)
 #     if error_msg:
-#         explanation_prompt = f"""
-# ROLE
-# You are a Healthcare Data System Assistant.
-
-# TASK
-# Explain to the user that their statistical medical query could not be completed.
-
-# CONTEXT
-# Generated SQL:
-# {generated_sql}
-
-# Database Error:
-# {error_msg}
-
-# RULES
-# - Do not speculate about technical causes.
-# - Do not invent database schema information.
-# - Provide a short and professional explanation.
-
-# OUTPUT
-# A clear message explaining that the statistical analysis could not be executed.
-# """
-
+#         explanation_prompt = f"Explain SQL error: {error_msg}"
 #     else:
-#         explanation_prompt = f"""
-# ROLE
-# You are a Clinical Data Analyst.
+#         explanation_prompt = f"Summarize these clinical results for query '{state['query']}': {db_results}"
 
-# TASK
-# Explain the results retrieved from the medical database.
+#     # ... (normalize_value և is_analysis_query ֆունկցիաները պահվում են անփոփոխ) ...
+#     # (Այստեղ ես կրճատում եմ տեքստը, բայց քո ֆայլում պահիր դրանք)
 
-# USER QUESTION
-# {state['query']}
+#     final_response = llm.invoke([("system", explanation_prompt)])
+#     final_text = final_response.content
 
-# DATABASE RESULTS
-# {db_results}
-
-# RULES
-# 1. Use only the provided database results.
-# 2. Do not invent additional patient data.
-# 3. Do not display raw JSON or dictionary structures.
-# 4. Choose the output format based on the query type:
-#    - If the user asks for specific patients by name or DOB, return a patient list.
-#    - Otherwise, summarize the statistical findings.
-
-# OUTPUT STRUCTURE (Patient Lookup)
-
-# Patient Search Result
-
-# Query Summary:
-# <brief description>
-
-# Number of Patients:
-# <count>
-
-# Patient Records:
-# <list of patients and key fields>
-
-# OUTPUT STRUCTURE (Patient Analysis)
-
-# Patient Medical Analysis
-
-# Query Summary:
-# <brief description>
-
-# Number of Records:
-# <count>
-
-# Records:
-# <per-exam analysis using diagnosis/conclusion/recommendations>
-
-# OUTPUT STRUCTURE (Statistical)
-
-# Statistical Analysis Result
-
-# Query Summary:
-# <brief description of the analysis>
-
-# Number of Records:
-# <count>
-
-# Key Findings:
-# <short interpretation of the data>
-# """
-
-#     def normalize_value(value: Any) -> str:
-#         if value is None:
-#             return "Not provided"
-#         if isinstance(value, (list, tuple)):
-#             items = [normalize_value(v) for v in value if v is not None]
-#             return "; ".join([v for v in items if v and v != "Not provided"]) or "Not provided"
-#         if isinstance(value, dict):
-#             return json.dumps(value, ensure_ascii=False)
-#         if isinstance(value, str):
-#             raw = value.strip()
-#             if not raw:
-#                 return "Not provided"
-#             if (raw.startswith("{") and raw.endswith("}")) or (raw.startswith("[") and raw.endswith("]")):
-#                 try:
-#                     parsed = json.loads(raw)
-#                     return normalize_value(parsed)
-#                 except Exception:
-#                     return raw
-#             return raw
-#         return str(value)
-
-#     def is_analysis_query(query_text: str) -> bool:
-#         if not query_text:
-#             return False
-#         lowered = query_text.lower()
-#         keywords = (
-#             "analysis",
-#             "result",
-#             "results",
-#             "report",
-#             "condition",
-#             "diagnosis",
-#             "conclusion",
-#             "recommendation",
-#             "exam",
-#             "test",
-#         )
-#         return any(k in lowered for k in keywords)
-
-#     if not error_msg and db_results and is_analysis_query(state.get("query", "")):
-#         lines = [
-#             "Patient Medical Analysis",
-#             "",
-#             f"Query Summary: {state.get('query')}",
-#             f"Number of Records: {len(db_results)}",
-#             "",
-#         ]
-
-#         for idx, row in enumerate(db_results, start=1):
-#             if not isinstance(row, dict):
-#                 continue
-#             lines.append(f"Record {idx}:")
-#             lines.append(f"Exam Date: {normalize_value(row.get('exam_date'))}")
-#             lines.append(
-#                 f"Examination Type: {normalize_value(row.get('examination_type'))}")
-#             lines.append(f"Diagnosis: {normalize_value(row.get('diagnosis'))}")
-#             lines.append(
-#                 f"Conclusion: {normalize_value(row.get('conclusion'))}")
-#             lines.append(
-#                 f"Recommendations: {normalize_value(row.get('recommendations'))}")
-#             lines.append("")
-
-#         final_text = "\n".join(lines).strip()
-#     else:
-#         final_response = llm.invoke([("system", explanation_prompt)])
-#         final_text = final_response.content
-
-#     doc_hashes = []
+#     # Հղումների հավաքագրում (Այլևս չենք կանչում build_pdf_urls)
+#     source_urls = set()
 #     for row in db_results:
 #         if not isinstance(row, dict):
 #             continue
-#         for key in ("document_hash", "doc_hash", "hash", "documentHash"):
-#             value = row.get(key)
-#             if value:
-#                 doc_hashes.append(str(value))
-#                 break
+#         # Վերցնում ենք URL-ը ուղիղ SQL-ի արդյունքից
+#         url = row.get("source_url") or row.get("sourceUrl")
+#         if url:
+#             source_urls.add(str(url))
 
-#     source_block = format_source_links(build_pdf_urls(doc_hashes))
+#     # Ձևավորում ենք հղումների բլոկը
+#     source_block = ""
+#     if source_urls:
+#         source_block = "\n\n🔗 **Source Documents (Google Drive):**\n" + "\n".join(
+#             [f"- [Դիտել Ֆայլը]({url})" for url in source_urls]
+#         )
 
 #     return {
 #         "final_answer": final_text + source_block,
 #         "sql_results": db_results
 #     }
 from typing import Dict, Any
-import json
 from sqlalchemy import text
 from src.core.config import llm
+# Վերադարձրել ենք անվտանգության համար
+from src.core.schemas import SqlQueryOutput
 from src.database.connection import SessionLocal
-# ՀԵՌԱՑՎԵԼ Է: source_link_service-ի ներմուծումը
 
 
 def statistical_filter_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    print("--- 📊 STATISTICAL FILTER AGENT (Agent 7 - SQL Direct) ---")
+    print("--- 📊 STATISTICAL FILTER AGENT (Agent 7 - Optimized) ---")
 
     db = SessionLocal()
+    user_query = state.get("query", "")
 
+    # Օգտագործում ենք Structured Output վստահելի SQL ստանալու համար
+    structured_llm = llm.with_structured_output(SqlQueryOutput)
+
+    # ==========================================
+    # 1. OPTIMIZED SQL GENERATION PROMPT
+    # ==========================================
     system_prompt = """
-ROLE
-You are a Clinical Data Science SQL Agent.
-Your task is to convert the user's statistical medical query into a precise T-SQL query.
+ROLE: You are an Expert Clinical Data Scientist & SQL Architect.
+TASK: Translate the user's statistical or cohort-based medical query into an optimized, read-only T-SQL query.
 
---------------------------------------------------
-DATABASE SCHEMA
-
+<schema>
 Table: patients
-Columns: [id, name, dob, gender, social_card]
+Columns:
+- id (INT, Primary Key)
+- name (VARCHAR)
+- dob (DATE)
+- gender (VARCHAR)
+- social_card (VARCHAR)
 
 Table: medical_exams
 Columns: 
-- exam_id, patient_id, exam_date, examination_type
-- diagnosis, conclusion, recommendations
-- document_hash
-- source_url      <-- ԱՎԵԼԱՑՎԱԾ Է (Google Drive URL)
+- exam_id (INT, Primary Key)
+- patient_id (INT, Foreign Key to patients.id)
+- exam_date (DATE)
+- examination_type (VARCHAR)
+- diagnosis (VARCHAR)
+- conclusion (VARCHAR)
+- recommendations (VARCHAR)
+- source_url (VARCHAR)
+</schema>
 
-Relationship: patients.id = medical_exams.patient_id
---------------------------------------------------
-
-TASK
-Generate a SQL query to retrieve patient cohorts or medical exam data.
-
-IMPORTANT:
-If the user asks for a specific patient's medical analysis or results, 
-ALWAYS include 'medical_exams.source_url' in your SELECT statement 
-so we can provide the original document link.
-
-SECURITY: Return ONLY the SQL query. No markdown.
+<rules>
+1. READ-ONLY: Use ONLY `SELECT` statements. NO modifications.
+2. AGGREGATION VS RECORDS: 
+   - If the query asks for statistics (counts, averages, percentages), use `COUNT()`, `GROUP BY`, etc. Do NOT select `source_url` for grouped/counted queries.
+   - If the query asks for a list of specific patients/exams, ALWAYS include `medical_exams.source_url`.
+3. JOINS: Join `patients.id = medical_exams.patient_id` when both demographic and exam data are needed.
+4. TEXT MATCHING: Use `LOWER(column) LIKE '%keyword%'` for text searches.
+5. OUTPUT FORMAT: Return ONLY the raw SQL query. No markdown, no explanations.
+</rules>
 """
 
-    sql_response = llm.invoke([
+    sql_data = structured_llm.invoke([
         ("system", system_prompt),
-        ("human", state["query"])
+        ("human", f"User Query: {user_query}")
     ])
 
-    generated_sql = sql_response.content.replace(
-        "```sql", "").replace("```", "").strip()
-    print(f"Generated SQL: {generated_sql}")
+    generated_sql = sql_data.generated_sql
+    print(f"--- ⚡ Generated SQL: {generated_sql} ---")
 
     db_results = []
     error_msg = None
@@ -367,40 +170,71 @@ SECURITY: Return ONLY the SQL query. No markdown.
         db_results = [dict(row._mapping) for row in result_proxy.fetchall()]
     except Exception as e:
         error_msg = str(e)
-        print(f"SQL Error: {error_msg}")
+        print(f"--- ⚠️ SQL Error: {error_msg} ---")
     finally:
         db.close()
 
-    # Արդյունքների բացատրության լոգիկան (Նույնն է մնում, ինչ քո կոդում)
+    # ==========================================
+    # 2. OPTIMIZED INTERPRETATION PROMPT
+    # ==========================================
     if error_msg:
-        explanation_prompt = f"Explain SQL error: {error_msg}"
+        explanation_prompt = f"""
+ROLE: Clinical Data Analyst
+TASK: Inform the user about a statistical query failure.
+CONTEXT: Error: {error_msg}
+RULES: Do not expose raw SQL. Explain the failure professionally in Armenian.
+"""
     else:
-        explanation_prompt = f"Summarize these clinical results for query '{state['query']}': {db_results}"
+        explanation_prompt = f"""
+ROLE: Clinical Data Analyst
+TASK: Present the statistical and clinical results clearly.
 
-    # ... (normalize_value և is_analysis_query ֆունկցիաները պահվում են անփոփոխ) ...
-    # (Այստեղ ես կրճատում եմ տեքստը, բայց քո ֆայլում պահիր դրանք)
+<data>
+User Query: {user_query}
+Database Results: {db_results}
+</data>
 
-    final_response = llm.invoke([("system", explanation_prompt)])
+<rules>
+1. STRICT GROUNDING: Use ONLY the provided Database Results.
+2. EMPTY STATE: If Database Results is `[]`, state clearly: "Տվյալների բազայում համապատասխան վիճակագրություն կամ գրառումներ չեն գտնվել:"
+3. FORMATTING: Present the data using a Markdown Table (if tabular data) or structured bullet points (if counts/statistics).
+4. LANGUAGE: Generate the final summary strictly in Armenian.
+5. PROFESSIONAL TONE: Provide a brief analytical conclusion based on the numbers.
+</rules>
+
+OUTPUT FORMAT:
+### 📊 Վիճակագրական և Տվյալների Վերլուծություն
+**Ամփոփում:** <Հակիրճ վերլուծություն>
+**Արդյունքներ:** <Աղյուսակ կամ ցանկ>
+"""
+
+    final_response = llm.invoke([
+        ("system", explanation_prompt),
+        ("human", "Generate the statistical report.")
+    ])
+
     final_text = final_response.content
 
-    # Հղումների հավաքագրում (Այլևս չենք կանչում build_pdf_urls)
+    # ==========================================
+    # 3. SOURCE URL HANDLING
+    # ==========================================
     source_urls = set()
     for row in db_results:
         if not isinstance(row, dict):
             continue
-        # Վերցնում ենք URL-ը ուղիղ SQL-ի արդյունքից
+        # Վերցնում ենք URL-ը (ապահովագրված case-sensitivity-ից)
         url = row.get("source_url") or row.get("sourceUrl")
         if url:
             source_urls.add(str(url))
 
-    # Ձևավորում ենք հղումների բլոկը
     source_block = ""
     if source_urls:
-        source_block = "\n\n🔗 **Source Documents (Google Drive):**\n" + "\n".join(
+        source_block = "\n\n🔗 **Կից փաստաթղթեր (Google Drive):**\n" + "\n".join(
             [f"- [Դիտել Ֆայլը]({url})" for url in source_urls]
         )
 
     return {
         "final_answer": final_text + source_block,
-        "sql_results": db_results
+        "sql_results": db_results,
+        "generated_sql": generated_sql
     }
