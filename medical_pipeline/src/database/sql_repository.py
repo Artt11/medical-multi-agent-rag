@@ -83,31 +83,41 @@ from typing import Iterable
 from src.core.base_repository import IDatabaseRepository
 from src.models.document import MedicalDocument
 from src.database.models import PatientModel, MedicalExamModel
+from src.utils.logger import get_logger
 
+logger = get_logger("DATABASE")
 
 class SqlDatabaseRepository(IDatabaseRepository):
     def __init__(self, db: Session):
+        logger.debug("Attempting to connect via SQL Session")
         self.db = db
 
     # ԱՎԵԼԱՑՎԱԾ Է. source_url պարամետրը
     def save(self, document: MedicalDocument, source_url: str = "") -> None:
+        try:
+            existing_exam = self.db.query(MedicalExamModel).filter(
+                MedicalExamModel.document_hash == document.hash
+            ).first()
 
-        existing_exam = self.db.query(MedicalExamModel).filter(
-            MedicalExamModel.document_hash == document.hash
-        ).first()
+            if existing_exam:
+                logger.info(
+                    f"Ֆայլը արդեն գոյություն ունի (Hash: {document.hash})։ Բաց ենք թողնում:")
+                return
 
-        if existing_exam:
-            print(
-                f"Ֆայլը արդեն գոյություն ունի (Hash: {document.hash})։ Բաց ենք թողնում:")
-            return
+            patient = self._get_or_create_patient(document.patient)
 
-        patient = self._get_or_create_patient(document.patient)
+            # ԱՎԵԼԱՑՎԱԾ Է. Փոխանցում ենք source_url-ը
+            self._save_exam_metadata(patient.id, document, source_url)
 
-        # ԱՎԵԼԱՑՎԱԾ Է. Փոխանցում ենք source_url-ը
-        self._save_exam_metadata(patient.id, document, source_url)
-
-        self.db.commit()
-        print(f" Հաջողությամբ պահպանվեց բազայում: Պացիենտ՝ {patient.name}")
+            self.db.commit()
+            logger.info(f"SQL Saved. Հաջողությամբ պահպանվեց բազայում: Պացիենտ՝ {patient.name}")
+        except Exception as e:
+            self.db.rollback()
+            if "pyodbc.OperationalError" in str(type(e)) or "operationalerror" in str(e).lower() or "timeout" in str(e).lower() or "interfaceerror" in str(e).lower():
+                logger.critical("🚨 DATABASE TIMEOUT: Check Azure Firewall and IP whitelist.")
+            else:
+                logger.error(f"SQL Save Error: {e}")
+            raise
 
     def list(self) -> Iterable[MedicalExamModel]:
         return self.db.query(MedicalExamModel).all()

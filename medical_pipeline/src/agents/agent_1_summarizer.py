@@ -55,7 +55,8 @@ def summarizer_node(state: Dict[str, Any]) -> Dict[str, Any]:
             query_text=query_text, patient_id=patient_id, top_k=5)
         chunks = retriever.search(search_params)
         context = "\n\n".join(
-            [f"<chunk>{c.page_content}</chunk>" for c in chunks])
+            # [f"<chunk>{c.page_content}</chunk>" for c in chunks])
+            [f"<chunk>{c.content}</chunk>" for c in chunks])
         for c in chunks:
             if c.blob_url:
                 source_urls.add(c.blob_url)
@@ -67,7 +68,7 @@ def summarizer_node(state: Dict[str, Any]) -> Dict[str, Any]:
 You are an expert Senior Clinical Informatics Specialist. Your task is to analyze medical data and provide a precise clinical summary.
 
 DATA HANDLING:
-The provided context may contain raw JSON structures or OCR-extracted text. 
+The provided context may contain raw JSON structures or OCR-extracted text.
 - If JSON: Map keys to clinical meanings (e.g., "val" -> value, "ref" -> reference range).
 - If OCR: Ignore formatting errors and focus on medical entities.
 
@@ -78,14 +79,14 @@ INSTRUCTIONS:
 
 STRICT RULES:
 - **Grounding**: Do not include information NOT found in the context.
-- **No Hallucinations**: If a value is missing, state "Not specified". 
+- **No Hallucinations**: If a value is missing, state "Not specified".
 - **Language**: If the User Query is in Armenian, provide the summary in Armenian. If in English, provide it in English.
 - **Empty State**: If context is insufficient, return: "Insufficient medical records available to provide a summary."
 
 OUTPUT STRUCTURE:
 ## Clinical Summary
 
-**Primary Diagnosis:** 
+**Primary Diagnosis:**
 <diagnosis or "Not specified">
 
 **Key Abnormal Findings:**

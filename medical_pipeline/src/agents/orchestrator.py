@@ -130,10 +130,12 @@
 from typing import Dict, Any
 from src.core.config import llm
 from src.core.schemas import RouteDecision
+from src.utils.logger import get_logger
 
+logger = get_logger("ORCHESTRATOR")
 
 def orchestrator_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    print("--- 🧠 ORCHESTRATOR AGENT (Master Router) ---")
+    logger.info(f"Incoming query: {state.get('query', '')}")
 
     structured_llm = llm.with_structured_output(RouteDecision)
 
@@ -197,9 +199,9 @@ If a value is entirely missing, return `null`. Do not guess.
     resolved_timeframe = state.get("timeframe") or decision.extracted_timeframe
     resolved_disease = state.get("disease") or decision.extracted_disease
 
-    print(f"--- 🧭 ROUTING DECISION: {decision.target_agent} ---")
-    print(
-        f"--- 📌 EXTRACTED: ID={resolved_patient_id}, Time={resolved_timeframe}, Disease={resolved_disease} ---")
+    logger.warning(
+        f"RouteDecision: Target Agent={decision.target_agent}, Extracted Entities: ID={resolved_patient_id}, Time={resolved_timeframe}, Disease={resolved_disease}"
+    )
 
     return {
         "next_node": decision.target_agent,

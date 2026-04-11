@@ -37,7 +37,7 @@ export function ChatInput({
           <Textarea
             ref={textareaRef}
             value={value}
-            placeholder="Տվեք բժշկական հարց..."
+            placeholder="Տվեք հարցը..."
             className="max-h-40 min-h-[44px] resize-none border-0 bg-transparent px-3 py-2.5 text-[0.95rem] shadow-none focus-visible:ring-0 leading-relaxed"
             rows={1}
             onChange={(event) => setValue(event.target.value)}

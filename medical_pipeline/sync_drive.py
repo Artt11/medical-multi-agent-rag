@@ -7,31 +7,24 @@ from src.services.chunking_service import ChunkingService
 from src.services.vector_service import AzureVectorService
 from src.database.sql_repository import SqlDatabaseRepository
 from src.core.medical_orchestrator import MedicalRAGOrchestrator
-from src.services.hash_service import BinaryHashService  # ԱՅՍՏԵՂԻՑ ԷՐ ՍԽԱԼԸ
+from src.services.hash_service import BinaryHashService
 
-# ԿԱՐԳԱՎՈՐՈՒՄՆԵՐ
 FOLDER_ID = "15xV7TIwIF2UJW_QXFOXwBwcdLzA0IlBU"
-# Համոզվիր, որ այս ֆայլը նույն թղթապանակում է կամ նշիր ճիշտ հասցեն
 CREDENTIALS_JSON = "gdrive_credentials.json"
 
 
 async def main():
     print("\n--- 🚀 Մեկնարկում է Medical Data Sync պրոցեսը (JSON Mode) ---")
 
-    # 1. DB Սեսիա
     db = SessionLocal()
 
     try:
-        # 2. Սերվիսների սկզբնավորում (Dependency Injection)
-        # Ստեղծում ենք Hasher-ը, որը Processor-ը պահանջում էր
         hash_service = BinaryHashService()
         storage = GoogleDriveService(CREDENTIALS_JSON, FOLDER_ID)
         repository = SqlDatabaseRepository(db)
 
-        # 3. Օրկեստրատոր (Այստեղ փոխանցում ենք բոլոր 6 արգումենտները)
         orchestrator = MedicalRAGOrchestrator(
             parser=PdfPlumberParser(),
-            # Հիմա hasher-ը տեղում է
             processor=MedicalProcessor(hasher=hash_service),
             chunker=ChunkingService(),
             storage=storage,
@@ -39,7 +32,6 @@ async def main():
             repository=repository
         )
 
-        # 4. Ստուգում ենք Drive-ը
         print(f"🔍 Սկանավորում ենք Google Drive թղթապանակը...")
         drive_files = storage.list_files()
 
@@ -52,17 +44,14 @@ async def main():
         for f in drive_files:
             file_id = f['id']
             file_name = f['name']
-            # Google Drive-ի հղումը
             drive_url = f.get('webViewLink', '')
 
             print(f"\n⚙️ Մշակվում է: {file_name}...")
 
             try:
-                # Ներբեռնում ենք և հաշվում հեշը (Duplicate ստուգելու համար)
                 pdf_bytes = storage.download_file_bytes(file_id)
                 doc_hash = hash_service.hash_bytes(pdf_bytes)
 
-                # Գլխավոր գործողությունը
                 result = await orchestrator.process_drive_file(
                     file_id=file_id,
                     file_name=file_name,

@@ -13,7 +13,11 @@ from sqlalchemy.orm import Session
 from fastapi import APIRouter, HTTPException, File, UploadFile, Depends
 import hashlib
 from dotenv import load_dotenv, find_dotenv
+from src.utils.logger import get_logger
+
 load_dotenv(find_dotenv(), override=True)
+
+logger = get_logger("API")
 
 router = APIRouter(prefix="/v1/medical", tags=["Medical Reports"])
 
@@ -31,6 +35,7 @@ chunker = ChunkingService()
 
 @router.post("/upload-medical-report")
 async def upload_report(file: UploadFile = File(...), db: Session = Depends(get_db)):
+    logger.info(f"Incoming POST request to /upload-medical-report for file {file.filename}")
 
     try:
         pdf_bytes = await file.read()
@@ -65,7 +70,7 @@ async def upload_report(file: UploadFile = File(...), db: Session = Depends(get_
 
     except Exception as e:
         import traceback
-        print(f" API Error: {traceback.format_exc()}")
+        logger.error(f"API Error: {traceback.format_exc()}")
         raise HTTPException(
             status_code=500, detail=f"Pipeline error: {str(e)}")
 
