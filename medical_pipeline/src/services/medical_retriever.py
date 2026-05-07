@@ -34,7 +34,6 @@ class HybridMedicalRetriever(IBaseRetriever):
             "search_text": params.query_text,
             "vector_queries": [vector_query],
             "top": params.top_k,
-
         }
         if filter_expr:
             search_kwargs["filter"] = filter_expr
@@ -44,10 +43,13 @@ class HybridMedicalRetriever(IBaseRetriever):
         return [
             RetrieverOutput(
                 content=doc.get("content"),
-                page_number=doc.get("metadata", {}).get("page"),
+                page_number=doc.get("page_number", 0),
                 blob_url=doc.get("blob_url"),
                 document_hash=doc.get("document_hash"),
                 score=doc.get("@search.score", 0.0),
-                metadata=doc.get("metadata", {})
+                metadata={
+                    "patient_id": doc.get("patient_id"),
+                    "examination_type": doc.get("examination_type")
+                }
             ) for doc in results
         ]

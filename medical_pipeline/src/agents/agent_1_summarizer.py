@@ -5,18 +5,26 @@ from src.core.schemas import MedicalSearchQuery
 from src.services.medical_retriever import HybridMedicalRetriever
 from src.database.connection import SessionLocal
 from src.database.models import PatientModel, MedicalExamModel
+from src.utils.logger import get_logger
+from src.agents.state import AgentState
+
+logger = get_logger("SUMMARIZER_AGENT")
 
 
-def summarizer_node(state: Dict[str, Any]) -> Dict[str, Any]:
-    print("--- 🤖 SUMMARIZER AGENT (Optimized for JSON & RAG) ---")
+def summarizer_node(state: AgentState) -> Dict[str, Any]:
+    logger.info(
+        f"Initiated SUMMARIZER AGENT for query: '{state.get('query', '')}'")
 
     patient_id = state.get("patient_id", "")
-    query_text = state["query"]
-    context = ""
-    source_urls = set()
+    query_original = state.get("query", "")
+    query_en = state.get("english_query", query_original)
+    user_lang = state.get("user_language", "Armenian")
 
-    # 1. SQL-FIRST LOGIC
+    context_blocks = []
+
     if patient_id:
+        logger.debug(
+            f"Attempting to fetch recent exams for patient ID: {patient_id}")
         db: Session = SessionLocal()
         try:
             patient = db.query(PatientModel).filter(
@@ -30,90 +38,71 @@ def summarizer_node(state: Dict[str, Any]) -> Dict[str, Any]:
                 ).order_by(MedicalExamModel.exam_date.desc()).limit(3).all()
 
                 if recent_exams:
-                    json_contexts = []
                     for exam in recent_exams:
                         if exam.full_json:
-                            # Օգտագործում ենք XML-ատիպ տեգեր կոնտեքստը LLM-ի համար ավելի ընկալելի դարձնելու համար
-                            json_contexts.append(
-                                f"<record>\n<date>{exam.exam_date}</date>\n<type>{exam.examination_type}</type>\n<raw_data>{exam.full_json}</raw_data>\n</record>")
-                        if exam.source_url:
-                            source_urls.add(exam.source_url)
-
-                    if json_contexts:
-                        context = "\n".join(json_contexts)
-                        print("--- ⚡ LOG: SQL JSON Context Loaded ---")
+                            url = exam.source_url or "#"
+                            context_blocks.append(
+                                f'<record date="{exam.exam_date}" type="{exam.examination_type}" source_url="{url}">\n{exam.full_json}\n</record>'
+                            )
+                    logger.info(
+                        f"Loaded SQL JSON Context: {len(recent_exams)} exams.")
         except Exception as e:
-            print(f"--- ⚠️ LOG: SQL Error: {e} ---")
+            logger.error(f"Database execution failed: {e}")
         finally:
             db.close()
 
-    # 2. FALLBACK TO VECTOR SEARCH
-    if not context:
-        print("--- 🔍 LOG: Falling back to Vector Search ---")
-        retriever = HybridMedicalRetriever()
-        search_params = MedicalSearchQuery(
-            query_text=query_text, patient_id=patient_id, top_k=5)
-        chunks = retriever.search(search_params)
-        context = "\n\n".join(
-            # [f"<chunk>{c.page_content}</chunk>" for c in chunks])
-            [f"<chunk>{c.content}</chunk>" for c in chunks])
-        for c in chunks:
-            if c.blob_url:
-                source_urls.add(c.blob_url)
+    if not context_blocks:
+        logger.warning(
+            "No JSON context found. Falling back to Semantic Vector Search.")
+        try:
+            retriever = HybridMedicalRetriever()
+            search_params = MedicalSearchQuery(
+                query_text=query_en, patient_id=patient_id, top_k=10
+            )
+            chunks = retriever.search(search_params)
 
-    # 3. IMPROVED LLM PROMPT
-    # Ավելացրել եմ Chain-of-Thought (հրահանգ՝ նախ վերլուծել, հետո գրել) և JSON մշակման կանոններ
-    system_prompt = (
-        """ROLE:
-You are an expert Senior Clinical Informatics Specialist. Your task is to analyze medical data and provide a precise clinical summary.
+            logger.info(
+                f"Vector search completed. Retrieved {len(chunks)} chunks.")
 
-DATA HANDLING:
-The provided context may contain raw JSON structures or OCR-extracted text.
-- If JSON: Map keys to clinical meanings (e.g., "val" -> value, "ref" -> reference range).
-- If OCR: Ignore formatting errors and focus on medical entities.
+            for c in chunks:
+                text_content = getattr(c, 'content', getattr(
+                    c, 'page_content', '')).strip()
+                url = getattr(c, 'blob_url', None)
+                if not url and hasattr(c, 'metadata'):
+                    url = c.metadata.get('blob_url', '#')
 
-INSTRUCTIONS:
-1. **Analyze**: Carefully scan the data for diagnoses, abnormal lab values (flagged as 'high', 'low', '*', or outside reference ranges), and doctor recommendations.
-2. **Synthesize**: Create a summary that reflects the patient's current health status based ONLY on the provided records.
-3. **Verify**: Ensure all measurements include their respective units (e.g., mg/dL, mmol/L).
+                if text_content:
+                    context_blocks.append(
+                        f'<chunk source_url="{url}">\n{text_content}\n</chunk>')
+        except Exception as e:
+            logger.error(f"Vector retrieval failed: {e}")
 
-STRICT RULES:
-- **Grounding**: Do not include information NOT found in the context.
-- **No Hallucinations**: If a value is missing, state "Not specified".
-- **Language**: If the User Query is in Armenian, provide the summary in Armenian. If in English, provide it in English.
-- **Empty State**: If context is insufficient, return: "Insufficient medical records available to provide a summary."
+    context = "\n\n".join(context_blocks)
 
-OUTPUT STRUCTURE:
-## Clinical Summary
+    system_prompt = f"""
+ROLE: Expert Senior Clinical Informatics Specialist.
+TASK: Analyze the provided patient records and give a clear, natural summary of their medical status.
 
-**Primary Diagnosis:**
-<diagnosis or "Not specified">
+CRITICAL RULES:
+1. DYNAMIC LANGUAGE: You MUST generate the entire summary strictly in {user_lang}.
+2. NO FORCED STRUCTURE: Do NOT use rigid fields. Just write a natural, coherent clinical summary of what is ACTUALLY present in the records. Group findings logically.
+3. INLINE CITATION: Every time you mention a test, finding, or result, you MUST append a link to its source file right next to it using this exact format: `[🔗 Դիտել]({{source_url}})` replacing {{source_url}} with the actual link from the tags.
+4. GROUNDING: Do not hallucinate. If context is empty, say "Տվյալ պացիենտի վերաբերյալ բժշկական գրառումներ չեն գտնվել:"
+"""
 
-**Key Abnormal Findings:**
-- <finding 1 with values/units>
-- <finding 2 with values/units>
+    human_message = f"USER QUERY ({user_lang}): {query_original}\n\n<medical_context>\n{context}\n</medical_context>"
 
-**Physician Conclusion & Impression:**
-<concise summary of doctor's final words>
-
-**Additional Clinical Notes:**
-<relevant details like follow-up dates or specific warnings or "None">"""
-    )
-
-    human_message = f"USER QUERY: {query_text}\n\n<medical_context>\n{context}\n</medical_context>"
-
+    logger.debug(
+        f"Invoking LLM for clinical summarization generation in {user_lang}.")
     response = llm.invoke([
         ("system", system_prompt),
         ("human", human_message)
     ])
 
-    # 4. Source Block Formatting
-    source_block = ""
-    if source_urls:
-        source_block = "\n\n🔗 **Կից փաստաթղթեր / Source Documents:**\n" + "\n".join(
-            [f"- [Դիտել ֆայլը]({url})" for url in source_urls])
+    logger.info("Summarization successfully completed.")
 
     return {
-        "final_answer": response.content + source_block,
-        "context_chunks": [context]
+        "final_answer": response.content,
+        "next_node": "end",
+        "intermediate_steps": ["📋 Սամարիզատորը վերլուծեց պացիենտի ամբողջական պատմությունը և պատրաստեց կլինիկական ամփոփագիր:"]
     }

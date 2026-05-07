@@ -26,7 +26,8 @@ class ChunkingService(IChunkingService):
             "source": doc.source,
             "patient_id": str(doc.patient.patient_id or "unknown"),
             "patient_name": doc.patient.name,
-            "exam_date": str(doc.patient.exam_date) if doc.patient.exam_date else None
+            "exam_date": str(doc.patient.exam_date) if doc.patient.exam_date else None,
+            "doc_hash": getattr(doc, 'hash', None)
         }
 
         def flush_buffer():
@@ -37,20 +38,23 @@ class ChunkingService(IChunkingService):
             if not text_content:
                 return
 
+            p_id = base_metadata['patient_id']
+            p_name = base_metadata['patient_name']
+            metadata_prefix = f"PATIENT_ID: {p_id} | NAME: {p_name} | \n"
+
+            final_content = metadata_prefix + text_content
+
             if len(text_content) < 500:
                 chunks.append(MedicalChunk(
-                    page_content=text_content,
-                    metadata={
-                        **base_metadata,
-                        "section": current_section,
-                        "type": "text"
-                    }
+                    page_content=final_content,
+                    metadata={**base_metadata,
+                              "section": current_section, "type": "text"}
                 ))
             else:
                 split_texts = self.text_splitter.split_text(text_content)
                 for i, split_t in enumerate(split_texts):
                     chunks.append(MedicalChunk(
-                        page_content=split_t,
+                        page_content=metadata_prefix + split_t,
                         metadata={
                             **base_metadata,
                             "section": current_section,
@@ -65,7 +69,7 @@ class ChunkingService(IChunkingService):
             if not isinstance(el, dict):
                 try:
                     el = el.dict()
-                except (Exception):
+                except:
                     continue
 
             content = str(el.get("content", "")).strip()
@@ -87,26 +91,24 @@ class ChunkingService(IChunkingService):
             if el_type == ElementType.TABLE.value or el_type == "table":
                 flush_buffer()
                 table_md = self._format_table_to_markdown(el.get("content"))
-
                 if table_md:
+                    p_id = base_metadata['patient_id']
                     chunks.append(MedicalChunk(
-                        page_content=table_md,
+                        page_content=f"PATIENT_ID: {p_id} | TABLE:\n" + table_md,
                         metadata={**base_metadata,
                                   "section": current_section, "type": "table"}
                     ))
-
             elif el_type == ElementType.TEXT.value or el_type == "text":
                 current_text_buffer.append(content)
 
         flush_buffer()
-
-        print(f" Chunking completed: Created {len(chunks)} chunks.")
+        print(
+            f" Chunking completed: Created {len(chunks)} chunks with Metadata Injection.")
         return chunks
 
     def _format_table_to_markdown(self, table_data: List[List[str]]) -> str:
         if not table_data:
             return ""
-
         try:
             headers = [str(cell).strip()
                        if cell else "" for cell in table_data[0]]

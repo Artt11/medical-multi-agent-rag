@@ -1,381 +1,283 @@
-absl-py==2.4.0
-accelerate==1.12.0
-acres==0.5.0
-aiofiles==24.1.0
-aiogram==3.22.0
-aiohappyeyeballs==2.6.1
-aiohttp==3.13.3
-aiosignal==1.4.0
-alembic==1.17.1
-annotated-doc==0.0.4
-annotated-types==0.7.0
-antlr4-python3-runtime==4.9.3
-anyio==4.12.1
-appnope==0.1.4
-argon2-cffi==25.1.0
-argon2-cffi-bindings==25.1.0
-arrow==1.3.0
-asttokens==3.0.0
-astunparse==1.6.3
-async-lru==2.0.5
-attrs==25.4.0
-Authlib==1.6.5
-azure-common==1.1.28
-azure-core==1.38.2
-azure-search-documents==11.6.0
-azure-storage-blob==12.28.0
-babel==2.17.0
-backoff==2.2.1
-bcrypt==5.0.0
-beautifulsoup4==4.13.5
-bleach==6.2.0
-bs4==0.0.2
-build==1.4.0
-cachetools==6.2.1
-certifi==2026.2.25
-cffi==2.0.0
-charset-normalizer==3.4.4
-chromadb==1.5.2
-ci-info==0.3.0
-click==8.3.1
-cloudpickle==3.1.2
-colorama==0.4.6
-colorlog==6.10.1
-comm==0.2.3
-configobj==5.0.9
-configparser==7.2.0
-contourpy==1.3.3
-cryptography==46.0.1
-cycler==0.12.1
-dataclasses-json==0.6.7
-debugpy==1.8.17
-decorator==5.2.1
-defusedxml==0.7.1
-Deprecated==1.3.1
-dill==0.4.0
-distro==1.9.0
-dnspython==2.8.0
-durationpy==0.10
-easyocr==1.7.2
-effdet==0.4.1
-email-validator==2.3.0
-emoji==2.15.0
-et_xmlfile==2.0.0
-etelemetry==0.3.1
-executing==2.2.1
-faiss-cpu==1.13.2
-Faker==38.2.0
-fastapi==0.116.1
-fastjsonschema==2.21.2
-filelock==3.25.0
-filetype==1.2.0
-fitz==0.0.1.dev2
-flatbuffers==25.12.19
-fonttools==4.61.1
-fqdn==1.5.1
-frozenlist==1.8.0
-fsspec==2026.2.0
-gast==0.7.0
-google-api-core==2.30.1
-google-api-python-client==2.193.0
-google-auth==2.49.1
-google-auth-httplib2==0.3.1
-google-auth-oauthlib==1.3.1
-google-pasta==0.2.0
-googleapis-common-protos==1.72.0
-graphviz==0.21
-grpc-google-iam-v1==0.14.3
-grpc-interceptor==0.15.4
-grpcio==1.78.0
-grpcio-status==1.76.0
-h11==0.16.0
-h5py==3.14.0
-hf-xet==1.3.2
-html5lib==1.1
-httpcore==1.0.9
-httplib2==0.31.1
-httptools==0.7.1
-httpx==0.28.1
-httpx-sse==0.4.3
-huggingface_hub==1.5.0
-idna==3.11
-ImageIO==2.37.2
-importlib_metadata==8.7.1
-importlib_resources==6.5.2
-ipykernel==6.30.1
-ipython==9.5.0
-ipython_pygments_lexers==1.1.1
-ipywidgets==8.1.7
-isodate==0.7.2
-isoduration==20.11.0
-jedi==0.19.2
-Jinja2==3.1.6
-jiter==0.10.0
-joblib==1.5.3
-json5==0.12.1
-jsonlines==4.0.0
-jsonpatch==1.33
-jsonpointer==3.0.0
-jsonref==1.1.0
-jsonschema==4.26.0
-jsonschema-specifications==2025.9.1
-jupyter==1.1.1
-jupyter-console==6.6.3
-jupyter-events==0.12.0
-jupyter-lsp==2.3.0
-jupyter_client==8.6.3
-jupyter_core==5.8.1
-jupyter_server==2.17.0
-jupyter_server_terminals==0.5.3
-jupyterlab==4.4.7
-jupyterlab_pygments==0.3.0
-jupyterlab_server==2.27.3
-jupyterlab_widgets==3.0.15
-kagglehub==0.3.13
-kiwisolver==1.4.9
-kubernetes==35.0.0
-langchain-classic==1.0.1
-langchain-community==0.4.1
-langchain-core==1.2.17
-langchain-ollama==1.0.1
-langchain-openai==1.1.10
-langchain-text-splitters==1.1.1
-langdetect==1.0.9
-langgraph==1.0.10
-langgraph-checkpoint==4.0.1
-langgraph-prebuilt==1.0.8
-langgraph-sdk==0.3.9
-langsmith==0.7.9
-lark==1.2.2
-latex2mathml==3.78.1
-lazy_loader==0.4
-libclang==18.1.1
-llvmlite==0.46.0
-looseversion==1.3.0
-lxml==6.0.2
-lyricsgenius==3.7.2
-magic-filter==1.0.12
-Mako==1.3.10
-Markdown==3.10.2
-markdown-it-py==4.0.0
-marko==2.2.1
-MarkupSafe==3.0.2
-marshmallow==3.26.2
-matplotlib-inline==0.1.7
-mcp==1.21.0
-mdurl==0.1.2
-mistune==3.1.4
-ml_dtypes==0.5.4
-mmh3==5.2.0
-mpire==2.10.2
-mpmath==1.3.0
-msoffcrypto-tool==6.0.0
-multidict==6.7.1
-multiprocess==0.70.18
-mypy_extensions==1.1.0
-namex==0.1.0
-nbclient==0.10.2
-nbconvert==7.16.6
-nbformat==5.10.4
-nest-asyncio==1.6.0
-networkx==3.6.1
-nibabel==5.3.3
-ninja==1.13.0
-nipype==1.10.0
-nltk==3.9.2
-notebook==7.4.5
-notebook_shim==0.2.4
-numba==0.63.1
-numpy==2.4.2
-oauthlib==3.3.1
-ocrmac==1.0.0
-olefile==0.47
-ollama==0.6.1
-omegaconf==2.3.0
-onnx==1.20.1
-onnxruntime==1.24.2
-openai==2.25.0
-opencv-python==4.13.0.92
-openpyxl==3.1.5
-opentelemetry-api==1.39.1
-opentelemetry-exporter-gcp-logging==1.11.0a0
-opentelemetry-exporter-gcp-monitoring==1.11.0a0
-opentelemetry-exporter-gcp-trace==1.11.0
-opentelemetry-exporter-otlp-proto-common==1.39.1
-opentelemetry-exporter-otlp-proto-grpc==1.39.1
-opentelemetry-exporter-otlp-proto-http==1.37.0
-opentelemetry-proto==1.39.1
-opentelemetry-resourcedetector-gcp==1.11.0a0
-opentelemetry-sdk==1.39.1
-opentelemetry-semantic-conventions==0.60b1
-opt_einsum==3.4.0
-optree==0.19.0
-orjson==3.11.7
-ormsgpack==1.12.2
-outcome==1.3.0.post0
-overrides==7.7.0
-packaging==26.0
-pandas==3.0.0
-pandocfilters==1.5.1
-parso==0.8.5
-pathlib==1.0.1
-pdf2image==1.17.0
-pdfminer.six==20250506
-pdfplumber==0.11.7
-pexpect==4.9.0
-pi_heif==1.2.0
-pikepdf==10.3.0
-pillow==11.3.0
-platformdirs==4.4.0
-pluggy==1.6.0
-polyfactory==3.0.0
-posthog==5.4.0
-prometheus_client==0.23.1
-prompt_toolkit==3.0.52
-propcache==0.4.1
-proto-plus==1.26.1
-protobuf==6.33.5
-prov==2.1.1
-psutil==7.1.0
-psycopg2==2.9.11
-ptyprocess==0.7.0
-pure_eval==0.2.3
-puremagic==1.30
-pyasn1==0.6.1
-pyasn1_modules==0.4.2
-pybase64==1.4.3
-pyclipper==1.3.0.post6
-pycocotools==2.0.11
-pycparser==2.23
-pycryptodome==3.23.0
-pydantic==2.12.5
-pydantic-settings==2.13.1
-pydantic_core==2.41.5
-pydot==4.0.1
-Pygments==2.19.2
-PyJWT==2.10.1
-pylatexenc==2.10
-PyMuPDF==1.26.7
-pyobjc-core==12.1
-pyobjc-framework-Cocoa==12.1
-pyobjc-framework-CoreML==12.1
-pyobjc-framework-Quartz==12.1
-pyobjc-framework-Vision==12.1
-pyodbc==5.3.0
-pypandoc==1.16.2
-pyparsing==3.3.2
-pypdf==6.7.0
-pypdfium2==5.4.0
-PyPika==0.51.1
-pyproject_hooks==1.2.0
-PySide6==6.10.0
-PySide6_Addons==6.10.0
-PySide6_Essentials==6.10.0
-PySocks==1.7.1
-python-bidi==0.6.7
-python-dateutil==2.9.0.post0
-python-docx==1.2.0
-python-dotenv==1.2.2
-python-iso639==2026.1.31
-python-json-logger==3.3.0
-python-magic==0.4.27
-python-multipart==0.0.20
-python-oxmsg==0.0.2
-python-pptx==1.0.2
-pytz==2025.2
-pyxnat==1.6.4
-PyYAML==6.0.3
-pyzmq==27.1.0
-RapidFuzz==3.14.3
-rapidocr==3.4.2
-rdflib==7.5.0
-referencing==0.37.0
-regex==2025.9.18
-reportlab==4.4.3
-requests==2.32.5
-requests-oauthlib==2.0.0
-requests-toolbelt==1.0.0
-rfc3339-validator==0.1.4
-rfc3986-validator==0.1.1
-rfc3987-syntax==1.1.0
-rich==14.3.3
-rpds-py==0.30.0
-rsa==4.9.1
-rtree==1.4.1
-safetensors==0.7.0
-scikit-image==0.25.2
-scipy==1.17.0
-selenium==4.35.0
-semchunk==2.2.2
-Send2Trash==1.8.3
-setuptools==80.9.0
-shapely==2.1.2
-shellingham==1.5.4
-shiboken6==6.10.0
-simplejson==3.20.2
-six==1.17.0
-sniffio==1.3.1
-sortedcontainers==2.4.0
-soupsieve==2.8
-SQLAlchemy==2.0.47
-sqlalchemy-spanner==1.17.1
-sqlparse==0.5.3
-sse-starlette==3.0.3
-stack-data==0.6.3
-starlette==0.47.3
-sympy==1.14.0
-tabulate==0.9.0
-tenacity==9.1.4
-termcolor==3.3.0
-terminado==0.18.1
-tifffile==2025.10.16
-tiktoken==0.11.0
-timm==1.0.24
-tinycss2==1.4.0
-tokenizers==0.22.2
-torch==2.9.1
-torchvision==0.24.1
-tornado==6.5.2
-tqdm==4.67.3
-traitlets==5.14.3
-traits==7.1.0
-transformers==4.57.1
-tree-sitter==0.25.2
-tree-sitter-c==0.24.1
-tree-sitter-java==0.23.5
-tree-sitter-javascript==0.25.0
-tree-sitter-python==0.25.0
-tree-sitter-typescript==0.23.2
-trio==0.30.0
-trio-websocket==0.12.2
-typer==0.24.1
-types-python-dateutil==2.9.0.20250822
-typing-inspect==0.9.0
-typing-inspection==0.4.2
-typing_extensions==4.15.0
-tzdata==2025.2
-tzlocal==5.3.1
-uri-template==1.3.0
-uritemplate==4.2.0
-urllib3==2.6.3
-uuid_utils==0.14.1
-uvicorn==0.41.0
-uvloop==0.22.1
-watchdog==6.0.0
-watchfiles==1.1.1
-wcwidth==0.2.13
-webcolors==24.11.1
-webencodings==0.5.1
-websocket-client==1.9.0
-websockets==16.0
-wheel==0.46.3
-widgetsnbextension==4.0.14
-wrapt==2.1.1
-wsproto==1.2.0
-xlrd==2.0.2
-xlsxwriter==3.2.9
-xxhash==3.6.0
-yarl==1.23.0
-yt-dlp==2025.9.5
-zipp==3.23.0
-zstandard==0.25.0
+# adbc_driver_manager==1.11.0
+# adbc_driver_postgresql==1.11.0
+# adbc_driver_sqlite==1.11.0
+# aesara==2.9.4
+# aim==3.29.1
+# aiohttp==3.13.3
+# amdsmi==7.0.2
+# anyio==4.12.1
+# apex==0.9.10dev
+# apollo_torch==1.0.3
+# array_api_strict==2.5
+# asgiref==3.11.1
+# atheris==3.0.0
+# authlib==1.6.5
+# auto_round==0.12.2
+# av==17.0.1
+# azureml==0.2.7
+# beanie==2.1.0
+# BeautifulSoup==3.2.2
+# boto3==1.42.94
+# botocore==1.42.94
+# brotli==1.2.0
+# brotlicffi==1.2.0.1
+# causal_conv1d==1.6.1
+# cchardet==2.1.7
+# chardet==7.4.3
+# checks==0.2
+# clearml==2.1.5
+# codecarbon==3.2.6
+# colorama==0.4.6
+# comet_ml==3.57.3
+# compressed_tensors==0.15.0.1
+# ConfigParser==7.2.0
+# coremltools==9.0
+# cppyy==3.5.0
+# cryptography==46.0.7
+# ctypes_snappy==1.03
+# cutlass==0.4.0
+# cycler==0.12.1
+# Cython==3.2.4
+# dagshub==0.7.0
+# decord==0.6.0
+# deeplearning==0.0.1
+# defusedxml==0.7.1
+# dl==0.1.0
+# docutils==0.22.4
+# dvclive==3.49.0
+# easyocr==1.7.2
+# email_validator==2.3.0
+# essentia==2.1b6.dev1389
+# etcd==2.0.8
+# eval_type_backport==0.3.1
+# expecttest==0.3.0
+# faiss==1.5.3
+# fast_hadamard_transform==1.1.0
+# fastai==2.8.7
+# fastapi==0.136.0
+# fastparquet==2026.3.0
+# fb==0.4.0
+# fbgemm_gpu==1.6.0
+# fbscribelogger==0.1.7
+# flint==0.0.1
+# flute==0.2.0
+# flytekit==1.16.19
+# fonttools==4.61.1
+# fqdn==1.5.1
+# ftfy==6.3.1
+# fugashi==1.5.2
+# g2p_en==2.1.0
+# galore_torch==1.0
+# gdown==6.0.0
+# gguf==0.18.0
+# gmpy2==2.3.0
+# google_api_python_client==2.193.0
+# gradio==6.13.0
+# grokadamw==0.1.2
+# h2==4.3.0
+# h5py==3.14.0
+# helion==1.0.0
+# hf_transfer==0.1.9
+# html5lib==1.1
+# HTMLParser==0.0.2
+# hypothesis==6.152.1
+# importlib_resources==6.5.2
+# inflect==7.3.1
+# ini2toml==0.15
+# InquirerPy==0.3.4
+# intel_extension_for_pytorch==2.8.0
+# ipadic==1.0.0
+# ipython==9.5.0
+# ipywidgets==8.1.7
+# isal==1.8.0
+# isoduration==20.11.0
+# jax==0.10.0
+# jaxlib==0.10.0
+# jnius==1.1.0
+# jsonpath_ng==1.8.0
+# jsonpointer==3.0.0
+# kenlm==0.3.0
+# keras_nlp==0.28.0
+# kerchunk==0.2.10
+# keyring==25.7.0
+# langchain_openai==1.2.0
+# langchain_text_splitters==1.1.2
+# langgraph==1.1.9
+# libcst==1.8.6
+# librosa==0.11.0
+# liger_kernel==0.7.0
+# lmdb==2.2.0
+# lomo_optim==0.1.1
+# lxml_html_clean==0.4.4
+# lz4==4.4.5
+# lzmaffi==0.3.0
+# mamba_ssm==2.3.1
+# mambapy==1.2.0
+# matchpy==0.5.5
+# mcp==1.27.0
+# megatron==0.5.1
+# mistral_common==1.11.0
+# ml_dtypes==0.5.4
+# mlflow==3.11.1
+# mlx_vlm==0.4.4
+# mlx_whisper==0.4.3
+# monkeytype==23.3.0
+# moviepy==2.2.1
+# msgspec==0.21.1
+# mtrand==0.1
+# multiset==3.2.0
+# mypy_boto3_secretsmanager==1.42.8
+# natten==0.21.6
+# ndonnx==0.18.1
+# neptune==1.14.0.post2
+# nltk==3.9.2
+# num2words==0.5.14
+# numexpr==2.14.1
+# objgraph==3.6.2
+# objprint==0.3.0
+# odfpy==1.4.1
+# odmantic==1.1.0
+# olefile==0.47
+# onnx_ir==0.2.1
+# onnxscript==0.7.0
+# opentelemetry_exporter_gcp_logging==1.11.0a0
+# opentelemetry_exporter_gcp_monitoring==1.11.0a0
+# opentelemetry_exporter_gcp_trace==1.11.0
+# opentelemetry_resourcedetector_gcp==1.11.0a0
+# optimum==2.1.0
+# optree==0.19.0
+# optuna==4.8.0
+# orjson==3.11.8
+# paramiko==4.0.0
+# path.py==12.5.0
+# pdfplumber==0.11.7
+# phonemizer==3.3.0
+# pkg1==0.0.3
+# pooch==1.9.0
+# pox==0.3.7
+# pretty_midi==0.2.11
+# pulp==3.3.0
+# pwlf==2.5.2
+# py==1.11.0
+# pycocotools==2.0.11
+# pycosat==0.6.6
+# pycryptodome==3.23.0
+# pyctcdecode==0.5.0
+# pycute==0.1.0
+# pydy==0.8.0
+# pygit2==1.19.2
+# pyglet==2.1.14
+# pygraphviz==1.14
+# PyInstaller==6.20.0
+# pyinstrument==5.1.2
+# pymc==5.28.4
+# pymc3==3.11.6
+# pymongo==4.17.0
+# pymupdf_fonts==1.0.5
+# pynvml==13.0.1
+# pyodide==0.0.2
+# pyOpenSSL==26.0.0
+# pyperf==2.10.0
+# PyQt4==4.11.4
+# PyQt5==5.15.11
+# PyQt6==6.11.0
+# pysat==3.2.2
+# pyside6==6.10.0
+# pyside6_addons==6.10.0
+# pyside6_essentials==6.10.0
+# pytest_fail_slow==0.6.0
+# pytest_run_parallel==0.8.2
+# pytest_subtests==0.15.0
+# pytest_timeout==2.4.0
+# pythainlp==5.3.4
+# python-slugify==8.0.4
+# python_calamine==0.6.2
+# python_Levenshtein==0.27.3
+# pytorch_lightning==2.6.1
+# pytorch_quantization==2.2.1
+# pyxlsb==1.0.10
+# qtpy==2.4.3
+# quark==1.0.0
+# qwen_vl_utils==0.0.14
+# ray==2.55.1
+# redis==7.4.0
+# requests_kerberos==0.15.0
+# rfc3339_validator==0.1.4
+# rfc3986_validator==0.1.1
+# rfc3987==1.3.8
+# rfc3987_syntax==1.1.0
+# rhoknp==1.8.0
+# rjieba==0.2.0
+# s3fs==2026.3.0
+# sacremoses==0.1.1
+# sage==0.0.0
+# scann==1.4.2
+# schedulefree==1.4.1
+# scikit_learn==1.8.0
+# scikits.talkbox==0.2.5
+# scipy_doctest==2.2.0
+# sentencepiece==0.2.1
+# setuptools_scm==10.0.5
+# sigopt==8.8.3
+# simplejson==3.20.2
+# slack_sdk==3.41.0
+# smbprotocol==1.16.1
+# soundfile==0.13.1
+# soxr==1.0.0
+# spacy==3.8.14
+# spqr_quant==0.2.0
+# SQLAlchemy==2.0.49
+# starlette==1.0.0
+# sudachipy==0.6.11
+# swanlab==0.7.16
+# symengine==0.14.1
+# tables==3.11.1
+# tensorboardX==2.6.5
+# tensorflow_hub==0.16.1
+# tensorflow_probability==0.25.0
+# tensorflow_text==2.20.1
+# tesserocr==2.10.0
+# tf2onnx==1.17.0
+# tf_keras==2.21.0
+# theano==1.0.5
+# thread==2.0.6
+# threadpoolctl==3.6.0
+# timm==1.0.26
+# torch_npu==2.9.0
+# torchao==0.17.0
+# torchaudio==2.11.0
+# torchcodec==0.11.1
+# torchdata==0.11.0
+# torchrec==1.6.0
+# torchvision_extra_decoders==0.0.2
+# trackio==0.24.2
+# traitlets==5.14.3
+# tree_sitter_c==0.24.1
+# tree_sitter_java==0.23.5
+# tree_sitter_java_orchard==0.5.6
+# tree_sitter_javascript==0.25.0
+# tree_sitter_python==0.25.0
+# tree_sitter_typescript==0.23.2
+# trove_classifiers==2026.1.14.14
+# ujson==5.12.0
+# unidic==1.1.0
+# unidic_lite==1.0.8
+# uri_template==1.3.0
+# urllib3_secure_extra==0.1.0
+# uroman==1.3.1.1
+# uvicorn==0.46.0
+# vllm==0.19.1
+# wandb==0.26.0
+# watchdog==6.0.0
+# wcwidth==0.2.13
+# webcolors==25.10.0
+# xarray==2026.4.0
+# xformers==0.0.35
+# xlrd==2.0.2
+# xmlrpclib==1.0.1
+# xmlrunner==1.7.7
+# xmltodict==1.0.4
+# xx==3.3.2
+# yarl==1.23.0
+# yt_dlp==2026.3.17
+# z3==0.2.0

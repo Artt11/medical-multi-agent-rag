@@ -13,7 +13,6 @@ class GoogleDriveService(IStorageService):
         """
         self.credentials = service_account.Credentials.from_service_account_file(
             credentials_path,
-            # readonly-ն բավարար է կարդալու համար
             scopes=['https://www.googleapis.com/auth/drive.readonly']
         )
         self.service = build('drive', 'v3', credentials=self.credentials)
@@ -28,13 +27,13 @@ class GoogleDriveService(IStorageService):
             results = self.service.files().list(
                 q=query,
                 fields="files(id, name, webViewLink)",
-                pageSize=1000  # Կարող ես կարգավորել ըստ քանակի
+                pageSize=1000
             ).execute()
 
             return results.get('files', [])
         except Exception as e:
             print(
-                f"--- ❌ Սխալ Google Drive-ից ֆայլերի ցուցակը վերցնելիս: {e} ---")
+                f"---  Սխալ Google Drive-ից ֆայլերի ցուցակը վերցնելիս: {e} ---")
             return []
 
     def download_file_bytes(self, file_id: str) -> bytes:
@@ -52,7 +51,7 @@ class GoogleDriveService(IStorageService):
 
             return fh.getvalue()
         except Exception as e:
-            print(f"--- ❌ Սխալ ֆայլը ներբեռնելիս (ID: {file_id}): {e} ---")
+            print(f"---  Սխալ ֆայլը ներբեռնելիս (ID: {file_id}): {e} ---")
             raise e
 
     def upload_medical_pair(self, file_hash: str, pdf_bytes: bytes, doc_data: dict) -> str:

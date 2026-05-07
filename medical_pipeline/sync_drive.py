@@ -1,10 +1,10 @@
 import asyncio
+from src.services.vector_service import AzureVectorService
 from src.database.connection import SessionLocal
 from src.services.google_drive_service import GoogleDriveService
 from src.services.pdf_parser import PdfPlumberParser
 from src.services.data_processor import MedicalProcessor
 from src.services.chunking_service import ChunkingService
-from src.services.vector_service import AzureVectorService
 from src.database.sql_repository import SqlDatabaseRepository
 from src.core.medical_orchestrator import MedicalRAGOrchestrator
 from src.services.hash_service import BinaryHashService

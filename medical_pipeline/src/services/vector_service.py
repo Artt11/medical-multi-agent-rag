@@ -22,7 +22,7 @@ class AzureVectorService:
 
         self.embeddings = AzureOpenAIEmbeddings(
             azure_deployment=os.getenv("AZURE_OPENAI_EMBEDDING_DEPLOYMENT"),
-            openai_api_version="2024-02-01",
+            openai_api_version="2024-12-01-preview",
             azure_endpoint=os.getenv("AZURE_OPENAI_EMBEDDING_ENDPOINT"),
             api_key=os.getenv("AZURE_OPENAI_EMBEDDING_API_KEY"),
         )
@@ -60,7 +60,7 @@ class AzureVectorService:
 
         index_client.create_or_update_index(index)
         print(
-            f" Ինդեքսը '{self.index_name}' հաջողությամբ ստեղծվեց (Vector Search Only):")
+            f" Ինդեքսը '{self.index_name}' հաջողությամբ ստեղծվեց (Vector Search Ready):")
 
     def index_chunks(self, chunks):
         search_docs = []
@@ -68,11 +68,14 @@ class AzureVectorService:
         for i, chunk in enumerate(chunks):
             vector = self.embeddings.embed_query(chunk.page_content)
 
+            p_id = chunk.metadata.get(
+                "patient_id") or chunk.metadata.get("patient_db_id")
+
             search_docs.append({
                 "id": f"{chunk.metadata.get('doc_hash')}-{i}",
                 "content": chunk.page_content,
                 "content_vector": vector,
-                "patient_id": str(chunk.metadata.get("patient_db_id")),
+                "patient_id": str(p_id) if p_id else "unknown",
                 "document_hash": chunk.metadata.get("doc_hash"),
                 "blob_url": chunk.metadata.get("blob_url"),
                 "examination_type": chunk.metadata.get("examination_type", "Medical Report")
@@ -84,4 +87,4 @@ class AzureVectorService:
         search_client = SearchClient(
             self.endpoint, self.index_name, self.credential)
         search_client.upload_documents(documents)
-        print(f"{len(documents)} փաստաթուղթ վերբեռնվեց:")
+        print(f" {len(documents)} փաստաթուղթ հաջողությամբ վերբեռնվեց Azure Search:")
